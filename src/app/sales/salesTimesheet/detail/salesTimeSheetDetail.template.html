@@ -1,0 +1,172 @@
+<ion-header>
+    <ion-toolbar>
+
+        <ion-title>
+            <label class="header">Description</label>
+        </ion-title>
+
+        <ion-buttons start>
+
+            <button ion-button (click)="dismiss()">
+                    <ion-icon name="md-close"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+
+    <ion-card>
+
+        <ion-card-header>
+
+            <ion-grid>
+
+                <ion-row>
+
+                    <ion-col col-12>
+                        <label class="item-text-wrap companyName">
+                            {{sales.comname}}
+                        </label>
+                    </ion-col>
+
+                </ion-row>
+
+                <ion-row>
+
+                    <ion-col col-6 class="ticketNumber">
+                        <label class="frmLabel">Number :-</label>
+                        <label class="frmText"> {{sales.id}}</label>
+                    </ion-col>
+
+                    <ion-col col-6 class="date">
+                        <label class="frmLabel">Date :-</label>
+                        <label class="frmText">  {{sales.date}}</label>
+                    </ion-col>
+                </ion-row>
+
+
+
+
+            </ion-grid>
+
+        </ion-card-header>
+
+        <ion-card-content>
+            <ion-row>
+                <ion-col>
+                    <form (ngSubmit)="save(salesForm.value)" [formGroup]='salesForm'>
+
+                        <ion-row>
+                            <ion-col col-12>
+                                <label class="frmLabel"> Description</label>
+                                <textarea formControlName="description" placeholder="Enter a description"  rows="4" ></textarea>
+                                <!-- <ion-textarea type="text" value="" formControlName="description"></ion-textarea> -->
+                            </ion-col>
+                        </ion-row>
+
+                        <ion-row>
+                            <ion-col col-12>
+                                <ion-label>Lead Generate</ion-label>
+                                <ion-checkbox [(ngModel)]="isLeadGenerate" formControlName="isLeadGenerate" (ionChange)="onSelectLeadGenerate()"></ion-checkbox>
+                            </ion-col>
+                        </ion-row>
+
+                        <ion-row *ngIf="isLeadGenerate">
+
+                            <ion-col col-12>
+                                <label class="frmLabel"> Reference </label>
+
+
+                                <!-- <ion-list [(ngModel)]="selectedSalesRef" radio-group formControlName="selectedSalesRef" style="height:100px;overflow:scroll">
+
+                                    <ion-item *ngFor="let salesRef of salesReferenceList">
+                                        <ion-label> {{salesRef.source}}</ion-label>
+                                        <ion-radio value="{{salesRef.source}}" (ionSelect)="onChangeSalesRef(salesRef)"></ion-radio>
+                                    </ion-item>
+
+                                </ion-list> -->
+
+                                <ion-select [(ngModel)]="selectedSalesRef" multiple="false" formControlName="selectedSalesRef" interface="popover">
+                                    <ion-option *ngFor="let salesRef of salesReferenceList" value="{{salesRef.source}}" (ionSelect)="onChangeSalesRef(salesRef)">{{salesRef.source}}</ion-option>
+
+                                </ion-select>
+
+
+                            </ion-col>
+
+
+                            <ion-col col-12>
+                                <label class="frmLabel"> Product </label>
+
+                                <ion-select [(ngModel)]="selectedSalesProduct" multiple="true" formControlName="selectedSalesProduct" interface="popover">
+                                    <ion-option *ngFor="let salesProduct of salesProductList" value="{{salesProduct.product}}">{{salesProduct.product}}</ion-option>
+
+                                </ion-select>
+
+                            </ion-col>
+
+
+                            <ion-col col-12>
+                                <label class="frmLabel"> Current Level </label>
+
+                                <!-- <ion-list [(ngModel)]="selectedSalesType" radio-group formControlName="selectedSalesType" style="height:100px;overflow:scroll">
+
+                                    <ion-item *ngFor="let salesType of saleTypeList">
+                                        <ion-label> {{salesType.level}}</ion-label>
+                                        <ion-radio value="{{salesType.level}}" (ionSelect)="onSelectOfSalesType(salesType)"></ion-radio>
+                                    </ion-item>
+
+                                </ion-list> -->
+
+                                <ion-select [(ngModel)]="selectedSalesType" multiple="false" formControlName="selectedSalesType" interface="popover">
+                                        <ion-option *ngFor="let salesType of saleTypeList" value="{{salesType.level}}" (ionSelect)="onSelectOfSalesType(salesType)">{{salesType.level}}</ion-option>
+    
+                                    </ion-select>
+                            </ion-col>
+
+
+                            <ion-col col-12 *ngIf="selectedSalesType=='Quotation' ||selectedSalesType=='Revised Quotation'||selectedSalesType=='Negociation'||selectedSalesType=='Waiting For PO'||selectedSalesType=='Confirmed Won'">
+                                <label class="frmLabel"> Approx Amount</label>
+                                <ion-input type="text" value="" formControlName="approxAmount"></ion-input>
+
+                                <label class="frmLabel"> Approx Profit</label>
+                                <ion-input type="text" value="" formControlName="approxProfit"></ion-input>
+                            </ion-col>
+
+
+                            <ion-col col-12>
+                                <label class="frmLabel"> Assign To </label>
+
+                                <!-- <ion-list [(ngModel)]="selectedSalesPerson" radio-group formControlName="selectedSalesPerson" style="height:100px;overflow:scroll">
+
+                                    <ion-item *ngFor="let salesPerson of salePersonList">
+                                        <ion-label> {{salesPerson.username}}</ion-label>
+                                        <ion-radio value="{{salesPerson.username}}" (ionSelect)="onSelectOfSalesPerson(salesPerson)"></ion-radio>
+                                    </ion-item>
+
+                                </ion-list> -->
+
+                                <ion-select [(ngModel)]="selectedSalesPerson" multiple="false" formControlName="selectedSalesPerson" interface="popover">
+                                        <ion-option *ngFor="let salesPerson of salePersonList" value="{{salesPerson.username}}" (ionSelect)="onSelectOfSalesPerson(salesPerson)">{{salesPerson.username}}</ion-option>
+    
+                                    </ion-select>
+
+                            </ion-col>
+                        </ion-row>
+
+                        <ion-row>
+                            <ion-col col-12>
+                                <button ion-button>CheckOut</button>
+
+                            </ion-col>
+                        </ion-row>
+                    </form>
+                </ion-col>
+            </ion-row>
+        </ion-card-content>
+
+    </ion-card>
+
+</ion-content>

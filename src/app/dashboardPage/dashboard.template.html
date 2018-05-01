@@ -1,0 +1,123 @@
+<!--page body-->
+<ion-content>
+
+  <!--header component-->
+  <mainHeader [title]="headerTitle"></mainHeader>
+
+  <div class="bodySection">
+
+    <!--<ion-grid>
+
+      <ion-row>
+
+        <ion-col col-12>
+          <ion-card>
+            <ion-card-header>
+              Tickets
+            </ion-card-header>
+            <ion-list>
+              <button ion-item (click)="GoToManageTicket('Open')">
+                <ion-icon name="mail-open" item-left></ion-icon>
+                Total Open Tickets
+                <ion-badge item-right class='counterSpan'>{{dashbord.open}}</ion-badge>
+              </button>
+
+              <button ion-item (click)="GoToManageTicket('Close')">
+              <ion-icon name="mail" item-left></ion-icon>
+              Total Closed Tickets
+              <ion-badge item-right class='counterSpan'>{{dashbord.close}}</ion-badge>
+            </button>
+
+              <button ion-item (click)="GoToManageTicket('In_prog')">
+            <ion-icon name="logo-android" item-left></ion-icon>
+            In Progress Tickets
+            <ion-badge item-right class='counterSpan'>{{dashbord.inProg}}</ion-badge>
+          </button>
+
+              <button ion-item (click)="GoToManageTicket('Pending')">
+              <ion-icon name="briefcase" item-left></ion-icon>
+              Total Pending Tickets
+              <ion-badge item-right class='counterSpan'>{{dashbord.pending}}</ion-badge>
+            </button>
+
+              <button ion-item (click)="GoToManageTicket('H/W_pob')">
+              <ion-icon name="build" item-left></ion-icon>
+              Total H/W Problem Tickets
+              <ion-badge item-right class='counterSpan'>{{dashbord.hwProb}}</ion-badge>
+            </button>
+
+              <button ion-item (click)="GoToManageTicket('I_cant_do_it')">
+              <ion-icon name="alert" item-left></ion-icon>
+              Total I Cant Do It Tickets
+              <ion-badge item-right class='counterSpan'>{{dashbord.iCantDoIt}}</ion-badge>
+            </button>
+
+            </ion-list>
+          </ion-card>
+
+        </ion-col>
+
+      </ion-row>
+    </ion-grid>-->
+
+
+    <ion-grid>
+      <ion-row class="dockHeight">
+
+        <ion-col col-6 class="dockOpen">
+
+          <p class="dockIcon">
+            <ion-icon name="mail-open" (click)="GoToManageTicket('Open')"></ion-icon>
+          </p>
+          <h1 class="dockCount">{{dashbord.open}}</h1>
+          <h4 class="dockTitle">Total Open Tickets</h4>
+
+
+        </ion-col>
+
+        <ion-col col-6 class="dockClose">
+          <p class="dockIcon">
+            <ion-icon name="mail" (click)="GoToManageTicket('Close')"></ion-icon>
+          </p>
+          <h1 class="dockCount">{{dashbord.close}}</h1>
+          <h4 class="dockTitle">Total Close Tickets</h4>
+        </ion-col>
+
+        <ion-col col-6 class="dockInProgress">
+          <p class="dockIcon">
+            <ion-icon name="logo-android" (click)="GoToManageTicket('In_prog')"></ion-icon>
+          </p>
+          <h1 class="dockCount">{{dashbord.inProg}}</h1>
+          <h4 class="dockTitle">Total In-Progess Tickets</h4>
+        </ion-col>
+
+        <ion-col col-6 class="dockPending">
+          <p class="dockIcon">
+            <ion-icon name="briefcase" (click)="GoToManageTicket('Pending')"></ion-icon>
+          </p>
+          <h1 class="dockCount">{{dashbord.pending}}</h1>
+          <h4 class="dockTitle">Total Pending Tickets</h4>
+        </ion-col>
+
+        <ion-col col-6 class="dockHW">
+          <p class="dockIcon">
+            <ion-icon name="build" (click)="GoToManageTicket('H/W_pob')"></ion-icon>
+          </p>
+          <h1 class="dockCount">{{dashbord.hwProb}}</h1>
+          <h4 class="dockTitle">Total H/W Problem Tickets</h4>
+        </ion-col>
+
+        <ion-col col-6 class="dockICantDo">
+          <p class="dockIcon">
+            <ion-icon name="alert" (click)="GoToManageTicket('I_cant_do_it')"></ion-icon>
+          </p>
+          <h1 class="dockCount">{{dashbord.iCantDoIt}}</h1>
+          <h4 class="dockTitle">Total I Cant Do It Tickets</h4>
+        </ion-col>
+
+      </ion-row>
+
+    </ion-grid>
+
+  </div>
+</ion-content>

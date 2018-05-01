@@ -1,0 +1,97 @@
+<ion-content>
+
+  <!--header component-->
+  <mainHeader [title]="headerTitle"></mainHeader>
+
+  <div class="bodySection">
+
+     <ion-searchbar (ionInput)="getItems($event)" placeholder="Search by company or engineer name"></ion-searchbar>
+
+    <ion-card *ngFor='let ticket of ticketListFiltered' (click)="showSelectedTicketDetailModal(ticket)">
+
+      <ion-card-header [ngClass]="{'allreadyAssigned':ticket.Status=='In_prog',
+      'iCantDoIt':ticket.Status=='I_cant_do_it'
+    ,'open':ticket.Status=='Open'
+    ,'pending':ticket.Status=='Pending'
+    }">
+
+        <ion-grid>
+
+          <ion-row>
+            <ion-col col-12>
+              <label class="item-text-wrap companyName">
+                {{ticket.comname}}
+              </label>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+
+            <ion-col col-6 class="ticketNumber">
+              <label class="frmLabel">Number :-</label>
+              <label class="frmText"> {{ticket.Ticketno}}</label>
+            </ion-col>
+
+            <ion-col col-6 class="date">
+              <label class="frmLabel">Date :-</label>
+              <label class="frmText">  {{ticket.date}}</label>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-grid>
+
+          <ion-row>
+
+            <ion-col col-6>
+              <label class="frmLabel">Contact Person</label>
+              <label class="frmText"> {{ticket.Clientname}}</label>
+            </ion-col>
+
+            <ion-col col-6>
+              <label class="frmLabel">Contact Number</label>
+              <label class="frmText"> {{ticket.Contactno}}</label>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col col-6>
+              <label class="frmLabel">Address</label>
+              <label class="frmText"> {{ticket.address}}</label>
+            </ion-col>
+
+            <ion-col col-6>
+              <label class="frmLabel">Status</label>
+              <label class="frmText"> {{ticket.Status}}</label>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col col-6>
+              <label class="frmLabel">Priority</label>
+              <label class="frmText"> {{ticket.Priority}}</label>
+            </ion-col>
+            <ion-col col-6>
+              <label class="frmLabel">Area</label>
+              <label class="frmText"> {{ticket.Area}}</label>
+            </ion-col>
+          </ion-row>
+
+          <ion-row *ngIf="ticket.person!=''">
+            <ion-col col-6>
+              <label class="frmLabel">Person</label>
+              <label class="frmText" style="color:red;font-size: 12px;font-weight: bold;"> {{ticket.person}}</label>
+            </ion-col>
+
+          </ion-row>
+
+
+
+        </ion-grid>
+      </ion-card-content>
+
+    </ion-card>
+  </div>
+</ion-content>

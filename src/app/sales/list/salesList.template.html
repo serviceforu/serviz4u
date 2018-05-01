@@ -1,0 +1,47 @@
+<ion-content>
+
+    <!--header component-->
+    <mainHeader [title]="headerTitle"></mainHeader>
+
+    <div class="bodySection">
+
+        <ion-card>
+
+            <ion-card-header>
+
+              Sales Report
+            </ion-card-header>
+
+            <ion-card-content>
+                <ion-grid>
+
+                    <ion-row>
+                       
+                        <ion-col col-3 class="tableHeader">Name</ion-col>
+                        <ion-col col-2 class="tableHeader">Type</ion-col>
+                        <ion-col col-3 class="tableHeader">Amount</ion-col>
+                        <ion-col col-2 class="tableHeader">Week No</ion-col>
+                        <!-- <ion-col col-2 class="tableHeader">Sales Id</ion-col> -->
+                        <!-- <ion-col col-2 class="tableHeader">Username</ion-col> -->
+                        <!-- <ion-col col-2 class="tableHeader">Date</ion-col> -->
+                      
+                    </ion-row>
+                    <ion-row *ngFor='let sales of salesList'>
+                        <ion-col col-3  class="tableContent"> {{sales.companyname}}</ion-col>
+                        <ion-col col-2 class="tableContent">{{sales.old_new}}</ion-col>
+                        <ion-col col-3 class="tableContent">{{sales.amount}}</ion-col>
+                        <ion-col col-3 class="tableContent">{{sales.week_no}}</ion-col>
+                        <!-- <ion-col col-3 class="tableContent">{{sales.week_no}}</ion-col> -->
+                        <!-- <ion-col col-2 class="tableContent">{{sales.username}}</ion-col> -->
+                        <!-- <ion-col col-2 class="tableContent">{{sales.date}}</ion-col> -->
+
+
+                    </ion-row>
+
+
+                </ion-grid>
+            </ion-card-content>
+
+        </ion-card>
+    </div>
+</ion-content>

@@ -1,0 +1,93 @@
+<ion-content>
+
+    <!--header component-->
+    <mainHeader [title]="headerTitle"></mainHeader>
+
+    <div class="bodySection">
+
+        <ion-card>
+
+            <ion-card-header>
+
+                Sales Timesheet Report
+            </ion-card-header>
+
+            <ion-card-content>
+
+                <ion-card *ngFor='let sales of salesTimeSheetList'>
+
+                    <ion-card-header (click)="showSelectedSalesDetailModal(sales)">
+
+                        <ion-grid>
+
+                            <ion-row>
+                                <ion-col col-12>
+                                    <label class="item-text-wrap companyName">
+                                                        {{sales.comname}}
+                                                      </label>
+                                </ion-col>
+                            </ion-row>
+
+                            <ion-row>
+
+                                <ion-col col-6 class="ticketNumber">
+                                    <label class="frmLabel">Number :-</label>
+                                    <label class="frmText"> {{sales.id}}</label>
+                                </ion-col>
+
+                                <ion-col col-6 class="date">
+                                    <label class="frmLabel">Date :-</label>
+                                    <label class="frmText">  {{sales.date}}</label>
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                    </ion-card-header>
+
+                    <ion-card-content>
+                        <ion-grid>
+
+                            <ion-row>
+
+                                <ion-col col-6>
+                                    <label class="frmLabel">Company Formate</label>
+                                    <label class="frmText"> {{sales.company_formate}}</label>
+                                </ion-col>
+
+                                <ion-col col-6>
+                                    <label class="frmLabel">Type</label>
+                                    <label class="frmText"> {{sales.type}}</label>
+                                </ion-col>
+                            </ion-row>
+
+                            <ion-row>
+
+                                <ion-col col-6>
+                                    <label class="frmLabel">Discription</label>
+                                    <label class="frmText"> {{sales.discription}}</label>
+                                </ion-col>
+
+                                <ion-col col-6>
+                                        <label class="frmLabel">Engineer Id</label>
+                                        <label class="frmText"> {{sales.eng_id}}</label>
+                                    </ion-col>
+
+                            </ion-row>
+
+                            <ion-row>
+
+                                <ion-col col-12>
+                                    <label class="frmLabel">Location</label>
+                                    <label class="frmText"> {{sales.location}}</label>
+                                </ion-col>
+
+                                
+
+                            </ion-row>
+                        </ion-grid>
+                    </ion-card-content>
+                </ion-card>
+            </ion-card-content>
+
+        </ion-card>
+    </div>
+</ion-content>

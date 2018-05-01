@@ -1,0 +1,135 @@
+// http://ionicframework.com/docs/v2/theming/
+
+
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.
+@font-face {
+    font-family: poorRich;
+    src: url("../assets/fonts/POORICH.TTF")format("truetype");
+}
+
+
+$header:#00918e;
+
+.themeFontColor{
+   color:$header; 
+}
+.themeFontBackGroundColor{
+   background-color:$header; 
+}
+.whiteFontColorOnBackGroundColor{
+    color:white;
+    background-color:$header; 
+}
+
+.bodySection
+{
+
+margin-top:65px;
+font-size: 10px!important;
+
+}
+
+.header{
+    
+    font-family: poorRich;
+    //color:$header!important;
+}
+
+ion-content{
+    background-color: white;
+//background: linear-gradient(grey,$header);
+}
+
+ion-menu
+{
+ion-content{
+background:whitesmoke;
+color: $header!important;
+font-family: poorRich;
+}
+
+.scroll-content{
+    padding: 5% 5%;
+        background:linear-gradient(to left, darkslategray, #a9acac);
+}
+.profileIcon{
+    font-size: 50px;
+}
+
+}
+
+.toolbar-background-md
+{
+    color:white;
+    background: $header;
+}
+.toolbar-title-md
+{
+    color:white;
+}
+
+.counterSpan{
+color:white;
+background-color:$header;
+    border: #e8e8e8 5px solid;
+    width: 25%;
+}
+
+input ,textarea,select,ion-datetime{
+margin: 0px!important;
+border:2px solid darkgrey!important;
+border-radius: 5px!important;
+
+}
+
+.tableHeader{
+    font-weight: bold;
+    word-wrap: break-word;
+}
+.tableContent{
+
+    word-wrap: break-word;
+}
+
+.datepicker-actions{
+    height: 35px;
+}
+.datepicker-panel
+{
+    max-width: 100%;
+    margin-top: 0!important;
+    padding: 0!important;
+}
+.datepicker-actions__input{
+    font:14px Roboto!important;;
+}
+
+attendence {
+    .card{
+    min-height:385px;
+    // overflow: auto
+}
+}
+applyLeave {
+    .card{
+    min-height:385px;
+    // overflow: auto
+}
+}
+
+textarea,input     
+{
+    width:100%;
+}

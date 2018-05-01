@@ -1,0 +1,144 @@
+<ion-header>
+    <ion-toolbar>
+
+        <ion-title>
+            <label class="header">Description</label>
+        </ion-title>
+
+        <ion-buttons start>
+
+            <button ion-button (click)="dismiss()">
+                    <ion-icon name="md-close"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+
+    <ion-card>
+
+        <ion-card-header>
+
+            <ion-grid>
+
+                <ion-row>
+
+                    <ion-col col-12>
+                        <label class="item-text-wrap companyName">
+                            {{ticket.comname}}
+                        </label>
+                    </ion-col>
+
+                </ion-row>
+
+                <ion-row>
+
+                    <ion-col col-6 class="ticketNumber">
+                        <label class="frmLabel">Number :-</label>
+                        <label class="frmText"> {{ticket.Ticketno}}</label>
+                    </ion-col>
+
+                    <ion-col col-6 class="date">
+                        <label class="frmLabel">Date :-</label>
+                        <label class="frmText">  {{ticket.date}}</label>
+                    </ion-col>
+                </ion-row>
+
+            </ion-grid>
+
+        </ion-card-header>
+
+        <ion-card-content>
+            <ion-grid>
+
+                <ion-row>
+                    <ion-col col-6>
+                        <label class="frmLabel">Contact Person</label>
+                        <label class="frmText"> {{ticket.Clientname}}</label>
+                    </ion-col>
+
+                    <ion-col col-6>
+                        <label class="frmLabel">Contact Number</label>
+                        <label class="frmText"> {{ticket.Contactno}}</label>
+                    </ion-col>
+                </ion-row>
+
+                <ion-row>
+                    <ion-col col-6>
+                        <label class="frmLabel">Account Owner</label>
+                        <label class="frmText"> {{ticket.aowner}}</label>
+                    </ion-col>
+
+                    <ion-col col-6>
+                        <label class="frmLabel"> Priority</label>
+                        <label class="frmText"> {{ticket.Priority}}</label>
+                    </ion-col>
+                </ion-row>
+
+                <ion-row>
+                    <ion-col col-6>
+                        <label class="frmLabel">Class</label>
+                        <label class="frmText"> {{ticket.class}}</label>
+                    </ion-col>
+                    <ion-col col-6>
+                        <label class="frmLabel">Area</label>
+                        <label class="frmText"> {{ticket.Area}}</label>
+                    </ion-col>
+                </ion-row>
+
+                <ion-row>
+                    <ion-col col-12>
+                        <label class="frmLabel">Problem</label>
+                        <textarea [(ngModel)]="problem" placeholder="Enter a problem" rows="4" >
+                            {{ticket.problem}}</textarea>
+                        <!-- <ion-textarea [(ngModel)]="problem" placeholder="Enter a problem">{{ticket.problem}}</ion-textarea> -->
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <!--<ion-col col-12>
+                                        <label class="frmLabel">Solution</label>
+                
+                                        <ion-textarea [(ngModel)]="solution" placeholder="Enter a solution">{{ticket.solution}}</ion-textarea>
+                                    </ion-col>-->
+
+                    <ion-col col-12>
+                        <ion-col col-4><label class="frmLabel">User</label></ion-col>
+                        <ion-col col-8>
+                            <ion-select [(ngModel)]="userSelected">
+                                <ion-option *ngFor="let user of userList" [value]="user.username">{{user.username}}</ion-option>
+
+                            </ion-select>
+                        </ion-col>
+                    </ion-col>
+
+
+                    <ion-col col-12>
+                        <ion-col col-6><label class="frmLabel">Status</label></ion-col>
+                        <ion-col col-6>
+                            <label class="frmText"> {{ticket.Status}}</label>
+
+                        </ion-col>
+                    </ion-col>
+
+                </ion-row>
+
+                <ion-row>
+                    <ion-col col-6>
+                        <button ion-button block small color='secondary' round (click)="save()">Save</button>
+                    </ion-col>
+                    <ion-col col-6>
+                        <button ion-button block small color='light' round (click)="dismiss()">Cancel</button>
+                    </ion-col>
+                </ion-row>
+
+
+            </ion-grid>
+        </ion-card-content>
+
+    </ion-card>
+
+
+
+</ion-content>

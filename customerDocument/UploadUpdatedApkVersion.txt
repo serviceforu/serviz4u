@@ -1,0 +1,20 @@
+1. Increase the version numbe n config file.
+	
+2. Create production build
+	ionic build android --p --r
+3. Place the release apk in java i.e java 1.8 based bin directory.
+C:\Program Files\Java\jdk1.8.0_121\bin
+
+4. Use below command to sign apk using key that is allready genereated.
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore my-release-key.jks android-release-unsigned.apk my-alias
+
+
+5. Put the password that was used first time to create certificate .a
+Pass:- android
+6. Press enter , this will sign the apk.
+
+7. Use zip align tool to optimize the APK.
+zipalign -v 4 android-release-unsigned.apk SolutionInfinite.apk
+
+mithila.solutioninfinite@gmail.com
+serviz4u

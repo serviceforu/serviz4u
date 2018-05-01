@@ -1,0 +1,45 @@
+alias name andoiddebugkey
+password android
+allias password android 
+
+
+C:\Program Files\Java\jdk1.8.0_121\bin>keytool -genkey -v -keystore my-release-k
+ey.jks -keyalg RSA -keysize 2048 -validity 10000 -alias my-alias
+Enter keystore password:
+Re-enter new password:
+They don't match. Try again
+Enter keystore password:
+Re-enter new password:
+What is your first and last name?
+  [Unknown]:  solution infnite
+What is the name of your organizational unit?
+  [Unknown]:  What is the name of your organization?
+  [Unknown]:
+C:\Program Files\Java\jdk1.8.0_121\bin>keytool -genkey -v -keystore my-release-k
+ey.jks -keyalg RSA -keysize 2048 -validity 10000 -alias my-alias
+Enter keystore password:
+Re-enter new password:
+What is your first and last name?
+  [Unknown]:  solution infinite
+What is the name of your organizational unit?
+  [Unknown]:  solution infinite
+What is the name of your organization?
+  [Unknown]:  solution infinite
+What is the name of your City or Locality?
+  [Unknown]:  mumbai
+What is the name of your State or Province?
+  [Unknown]:  maharashtra
+What is the two-letter country code for this unit?
+  [Unknown]:  in
+Is CN=solution infinite, OU=solution infinite, O=solution infinite, L=mumbai, ST
+=maharashtra, C=in correct?
+  [no]:  yes
+
+Generating 2,048 bit RSA key pair and self-signed certificate (SHA256withRSA) wi
+th a validity of 10,000 days
+        for: CN=solution infinite, OU=solution infinite, O=solution infinite, L=
+mumbai, ST=maharashtra, C=in
+Enter key password for <my-alias>
+        (RETURN if same as keystore password):
+Re-enter new password:
+[Storing my-release-key.jks]

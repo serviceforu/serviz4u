@@ -1,0 +1,56 @@
+<ion-menu [content]="content">
+
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Solution Infinite</ion-title>
+      <!--<button (click)="exit()">Exit</button>-->
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+
+   
+
+    <ion-list>
+      <ion-item>
+
+        <ion-row>
+          <ion-col col-4>
+            <ion-avatar item-left>
+              <ion-icon class="profileIcon" name='contact'></ion-icon>
+            </ion-avatar>
+          </ion-col>
+
+          <ion-col col-8>
+            <h2>{{user.username}}</h2>
+            <h3>{{user.designation}}</h3>
+            <p>{{user.zone}}</p>
+          </ion-col>
+
+        </ion-row>
+
+
+      </ion-item>
+
+      <ion-item class="whiteFontColorOnBackGroundColor" menuClose *ngFor="let menu of menuList" (click)="openPage(menu)">
+        <ion-icon [name]="menu.menuIcon" item-left></ion-icon>
+        {{menu.menuTitle}}
+      </ion-item>
+
+      <ion-item class="whiteFontColorOnBackGroundColor" menuClose  (click)="logOff()">
+        <ion-icon name="power" item-left></ion-icon>
+        Log Off
+      </ion-item>
+    </ion-list>
+
+
+
+
+  </ion-content>
+
+</ion-menu>
+
+<!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false">
+
+</ion-nav>

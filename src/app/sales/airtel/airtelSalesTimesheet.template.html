@@ -1,0 +1,228 @@
+<ion-content>
+
+    <!--header component-->
+    <mainHeader [title]="headerTitle"></mainHeader>
+
+    <div class="bodySection">
+
+        <ion-card>
+
+            <ion-card-header>
+                DSR Form
+            </ion-card-header>
+
+
+            <ion-card-content>
+
+                <ion-row>
+                    <ion-col>
+                        <form (ngSubmit)="save(salesForm.value)" [formGroup]='salesForm'>
+
+
+
+                            <!-- <ion-row>
+                                <ion-col col-12>
+                                    <label class="frmLabel"> ISP Name</label>
+                                    <ion-select formControlName="ispName" interface="popover" [(ngModel)]="ispName">
+                                        <ion-option *ngFor="let isp of ispList" value="{{isp.isp_name}}" 
+                                        (ionSelect)="onChangeISP(isp)">{{isp.isp_name}}</ion-option>
+                                    </ion-select>
+                                </ion-col>
+                            </ion-row> -->
+
+
+                            <ion-row>
+                                <ion-col col-12>
+                                    <label class="frmLabel"> Company Formate</label>
+                                    <ion-select formControlName="companyFormate" interface="popover" [(ngModel)]="companyFormate">
+
+                                        <!-- <ion-option value="old" (ionSelect)='onCustomerFormateChange("old")'>Old</ion-option> -->
+
+                                        <ion-option value="new" (ionSelect)='onCustomerFormateChange("new")'>New</ion-option>
+
+                                        <ion-option value="first_time" (ionSelect)='onCustomerFormateChange("first_time")'>First Time</ion-option>
+
+                                        <ion-option value="office" (ionSelect)='onCustomerFormateChange("office")'>Office</ion-option>
+
+                                        <ion-option value="travelling" (ionSelect)='onCustomerFormateChange("travelling")'>Travelling</ion-option>
+
+                                        <ion-option value="other" (ionSelect)='onCustomerFormateChange("other")'>Other</ion-option>
+
+                                        <ion-option value="leave" (ionSelect)='onCustomerFormateChange("leave")'>Leave</ion-option>
+
+                                        <ion-option value="cold calling" (ionSelect)='onCustomerFormateChange("cold calling")'>Cold Calling</ion-option>
+
+                                    </ion-select>
+                                </ion-col>
+                            </ion-row>
+
+
+                            <ion-row *ngIf="companyFormate=='old' ||companyFormate=='new'">
+                                <ion-col col-12>
+                                    <label class="frmLabel"> Customer Name</label>
+
+                                    <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+
+                                    <ion-list radio-group formControlName="comid" style="height:100px;overflow:scroll">
+
+                                        <ion-item *ngFor="let company of companyListSorted">
+                                            <ion-label> {{company.companyname}}</ion-label>
+                                            <ion-radio value="{{company.comid}}" (ionSelect)="onChangeCustomer(company)"></ion-radio>
+                                        </ion-item>
+
+                                    </ion-list>
+
+
+                                </ion-col>
+                            </ion-row>
+
+                            <ion-row *ngIf="companyFormate=='office'">
+                                <ion-col col-12>
+                                    <label class="frmLabel"> Activity </label>
+
+                                    <!-- <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar> -->
+
+                                    <ion-list radio-group formControlName="selectedOfficeActivity" style="height:100px;overflow:scroll">
+
+                                        <ion-item *ngFor="let actitvity of officeActivityList">
+                                            <ion-label> {{actitvity.type}}</ion-label>
+                                            <ion-radio value="{{actitvity.id}}" (ionSelect)="onChangeActivity(actitvity)"></ion-radio>
+                                        </ion-item>
+
+                                    </ion-list>
+
+
+                                </ion-col>
+                            </ion-row>
+
+                            <ion-row *ngIf="companyFormate=='other'">
+                                <ion-col col-12>
+                                    <label class="frmLabel"> Activity </label>
+
+
+                                    <ion-list radio-group formControlName="selectedOtherActivity" style="height:100px;overflow:scroll">
+
+                                        <ion-item *ngFor="let actitvity of otherActivityList">
+                                            <ion-label> {{actitvity.type}}</ion-label>
+                                            <ion-radio value="{{actitvity.id}}" (ionSelect)="onChangeOtherActivity(actitvity)"></ion-radio>
+                                        </ion-item>
+
+                                    </ion-list>
+
+
+                                </ion-col>
+                            </ion-row>
+
+                            <ion-row *ngIf="companyFormate=='travelling'">
+                                <ion-col col-12>
+                                    <label class="frmLabel"> Location </label>
+
+                                    <!-- <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar> -->
+
+                                    <ion-list radio-group formControlName="selectedTravelType" style="height:100px;overflow:scroll">
+
+                                        <ion-item *ngFor="let actitvity of typeOfTravellingList">
+                                            <ion-label> {{actitvity.type}}</ion-label>
+                                            <ion-radio value="{{actitvity.id}}" (ionSelect)="onChangeTravel(actitvity)"></ion-radio>
+                                        </ion-item>
+
+                                    </ion-list>
+
+
+                                </ion-col>
+                            </ion-row>
+
+
+                            <ion-row *ngIf="companyFormate=='leave'">
+                                <ion-col col-12>
+                                    <label class="frmLabel"> Leave </label>
+
+                                    <ion-select formControlName="leaveType" interface="popover">
+
+                                        <ion-option value="full_day" (ionSelect)='onLeaveTypeChange("full_day")'>Full Day</ion-option>
+                                        <ion-option value="half_day" (ionSelect)='onLeaveTypeChange("half_day")'>Half Day</ion-option>
+                                        <ion-option value="holiday" (ionSelect)='onLeaveTypeChange("holiday")'>Holiday</ion-option>
+                                    </ion-select>
+
+                                </ion-col>
+                            </ion-row>
+
+                            <ion-row *ngIf="companyFormate=='first_time'">
+
+                                <ion-col col-12>
+                                    <label class="frmLabel"> Customer Name </label>
+                                    <input type="text" value="" formControlName="customerName" />
+                                    <!-- <ion-input type="text" value="" formControlName="customerName"></ion-input> -->
+                                </ion-col>
+                                <ion-col col-12>
+                                    <label class="frmLabel"> Area </label>
+                                    <input type="text" value="" formControlName="area" />
+                                    <!-- <ion-input type="text" value="" formControlName="area"></ion-input> -->
+                                </ion-col>
+                                <ion-col col-12>
+                                    <label class="frmLabel"> Contact person </label>
+                                    <input type="text" value="" formControlName="person" />
+                                    <!-- <ion-input type="text" value="" formControlName="person"></ion-input> -->
+                                </ion-col>
+                                <ion-col col-12>
+                                    <label class="frmLabel"> Contact no </label>
+                                    <input type="text" value="" formControlName="contact" />
+                                    <!-- <ion-input type="text" value="" formControlName="contact"></ion-input> -->
+                                </ion-col>
+                                <ion-col col-12>
+                                    <label class="frmLabel"> Address </label>
+                                    <input type="text" value="" formControlName="address" />
+                                    <!-- <ion-input type="text" value="" formControlName="address"></ion-input> -->
+                                </ion-col>
+                                <ion-col col-12>
+                                    <label class="frmLabel"> Reference </label>
+
+
+                                    <ion-list radio-group formControlName="selectedSalesRef" style="height:100px;overflow:scroll">
+
+                                        <ion-item *ngFor="let salesRef of salesReferenceList">
+                                            <ion-label> {{salesRef.source}}</ion-label>
+                                            <ion-radio value="{{salesRef.source}}" (ionSelect)="onChangeSalesRef(salesRef)"></ion-radio>
+                                        </ion-item>
+
+                                    </ion-list>
+                                    <!-- <ion-select formControlName="refrence" interface="popover">
+                                        <ion-option *ngFor="let salesRef of salesReferenceList" value="salesRef.source">{{salesRef.source}}</ion-option>
+                                       
+
+                                    </ion-select> -->
+
+                                </ion-col>
+                                <ion-col col-12>
+                                    <button ion-button type="button" (click)="addNewCompany()">Add New Company</button>
+
+                                </ion-col>
+                            </ion-row>
+
+
+                            <ion-row *ngIf="companyFormate=='cold calling'">
+
+                                <ion-col col-12>
+                                    <label class="frmLabel"> Building Name </label>
+                                    <input type="text" value="" formControlName="buildingName" />
+                                    <!-- <ion-input type="text" value="" formControlName="customerName"></ion-input> -->
+                                </ion-col>
+                            </ion-row>
+
+                            <ion-row>
+                                <ion-col col-12>
+                                    <button ion-button>Check In</button>
+
+                                </ion-col>
+                            </ion-row>
+
+                        </form>
+                    </ion-col>
+                </ion-row>
+
+
+            </ion-card-content>
+        </ion-card>
+
+    </div>
+</ion-content>

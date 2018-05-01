@@ -1,0 +1,50 @@
+.dockHeight
+{
+height: 150px;
+color:white;
+}
+
+.dockOpen{
+   background-color:#607d8b; 
+   padding: 2%; 
+}
+.dockClose{
+background-color:#ffc107; 
+padding: 2%; 
+}
+
+.dockInProgress{
+background-color:#81b25f; 
+padding: 2%; 
+}
+.dockPending{
+background-color:#170c5a; 
+padding: 2%; 
+}
+.dockHW{
+background-color:#4a2748; 
+padding: 2%; 
+}
+.dockICantDo{
+background-color:orangered; 
+padding: 2%; 
+
+}
+.dockIcon{
+    font-size: 30px;
+    text-align: center;
+    align-content: center;
+    align-items: center;
+}
+.dockTitle{
+    font-size: 12px;
+    text-align: center;
+    align-content: center;
+    align-items: center;
+}
+.dockCount{
+    font-size: 16px;
+     text-align: center;
+    align-content: center;
+    align-items: center;
+}

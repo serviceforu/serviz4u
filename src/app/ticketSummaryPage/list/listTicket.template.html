@@ -1,0 +1,120 @@
+<ion-content>
+
+  <!--header component-->
+  <mainHeader [title]="headerTitle"></mainHeader>
+
+  <div class="bodySection">
+
+    <ion-card *ngFor='let ticket of ticketList'>
+
+      <ion-card-header (click)="showSelectedTicketDetailModal(ticket)" [ngClass]="{'allreadyAssigned':ticket.Status=='In_prog',
+      'iCantDoIt':ticket.Status=='I_cant_do_it'
+    ,'open':ticket.Status=='Open'
+    ,'pending':ticket.Status=='Pending'
+    }">
+
+
+        <ion-grid>
+
+          <ion-row>
+            <ion-col col-12>
+              <label class="item-text-wrap companyName">
+                {{ticket.comname}}
+              </label>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+
+            <ion-col col-6 class="ticketNumber">
+              <label class="frmLabel">Number :-</label>
+              <label class="frmText"> {{ticket.Ticketno}}</label>
+            </ion-col>
+
+            <ion-col col-6 class="date">
+              <label class="frmLabel">Date :-</label>
+              <label class="frmText">  {{ticket.date}}</label>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-grid>
+
+          <ion-row>
+
+            <ion-col col-6>
+              <label class="frmLabel">Contact Person</label>
+              <label class="frmText"> {{ticket.Clientname}}</label>
+            </ion-col>
+
+            <ion-col col-6>
+              <label class="frmLabel">Contact Number</label>
+              <label class="frmText"> {{ticket.Contactno}}</label>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col col-6>
+              <label class="frmLabel">Address</label>
+              <label class="frmText"> {{ticket.address}}</label>
+            </ion-col>
+
+            <ion-col col-6>
+              <label class="frmLabel">Status</label>
+              <label class="frmText"> {{ticket.Status}}</label>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col col-6>
+              <label class="frmLabel">Priority</label>
+              <label class="frmText"> {{ticket.Priority}}</label>
+            </ion-col>
+
+            <ion-col col-6 *ngIf="ticket.intime!=''">
+              <label class="frmLabel">Check In Time</label>
+              <label class="frmText"> {{ticket.intime}}</label>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col col-6>
+              <label class="frmLabel">Check Id</label>
+              <label class="frmText"> {{ticket.check_id}}</label>
+            </ion-col>
+
+            <!-- <ion-col col-6 *ngIf="ticket.intime!=''">
+              <label class="frmLabel">Check In Time</label>
+              <label class="frmText"> {{ticket.intime}}</label>
+            </ion-col> -->
+          </ion-row>
+
+
+          <ion-row>
+            <ion-col col-6>
+              <button ion-button small block round color='secondary' (click)="checkIn(ticket)" *ngIf="ticket.Status=='Open'||ticket.Status=='Pending'">
+                Check In
+              </button>
+
+            </ion-col>
+            <ion-col col-6>
+              <button ion-button small block round color='danger' (click)="checkOut(ticket)" *ngIf="ticket.action=='' && ticket.Status!='In_prog'">
+                Check Out
+              </button>
+            </ion-col>
+          </ion-row>
+
+        </ion-grid>
+      </ion-card-content>
+
+    </ion-card>
+
+    <ion-card *ngIf="!ticketList">
+      <ion-card-content>
+        No Tickets Assigned .<br/> Contact or Update to support team .
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

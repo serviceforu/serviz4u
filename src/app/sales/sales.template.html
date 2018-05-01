@@ -1,0 +1,91 @@
+<ion-content>
+
+    <!--header component-->
+    <mainHeader [title]="headerTitle"></mainHeader>
+
+    <div class="bodySection">
+
+        <ion-card>
+
+            <ion-card-header>
+                Sales Profit Form
+            </ion-card-header>
+
+
+            <ion-card-content>
+
+                <ion-row>
+                    <ion-col>
+                        <form (ngSubmit)="save(salesForm.value)" [formGroup]='salesForm'>
+
+                            <ion-row>
+                                <ion-col col-12>
+                                    <label class="frmLabel"> Date</label>
+                                    <date-picker  formControlName="date" format="D/M/YYYY"></date-picker>
+                                    <!-- <ion-datetime displayFormat="DD/MM/YYYY" formControlName="date"></ion-datetime> -->
+                                    <!-- <button type="button" ion-button (click)="showDateCalender()">Show Calender</button> -->
+                                </ion-col>
+                            </ion-row>
+
+                            <!-- <ion-row>
+                                <ion-col col-12>
+                                    <label class="frmLabel"> Week Number</label>
+                                    
+                                    <ion-input type="text" value="" formControlName="weekNumber"></ion-input>
+                                </ion-col>
+                            </ion-row> -->
+
+                            <ion-row>
+                                <ion-col col-12>
+                                    <label class="frmLabel">Company Type</label>
+                                    <ion-select formControlName="companyType" interface="popover">
+                                        <ion-option value="old" (ionSelect)='onCustomerTypeChange("old")'>Old</ion-option>
+                                        <ion-option value="new" (ionSelect)='onCustomerTypeChange("new")'>New</ion-option>
+                                    </ion-select>
+                                </ion-col>
+                            </ion-row>
+
+                            <ion-row *ngIf="companyType!=null">
+                                <ion-col col-12>
+                                    <label class="frmLabel"> Customer Name</label>
+
+                                    <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+
+                                    <ion-list radio-group formControlName="comid" style="height:100px;overflow:scroll">
+
+                                        <ion-item *ngFor="let company of companyListSorted">
+                                            <ion-label> {{company.companyname}}</ion-label>
+                                            <ion-radio value="{{company.comid}}" (ionSelect)="onChangeCustomer(company)"></ion-radio>
+                                        </ion-item>
+
+                                    </ion-list>
+
+
+                                </ion-col>
+                            </ion-row>
+
+                            <ion-row>
+                                <ion-col col-12>
+                                    <label class="frmLabel"> Net Amount</label>
+                                    <input type="text"  value="" formControlName="profitAmount" />
+                                    <!-- <ion-input type="text" value="" formControlName="profitAmount"></ion-input> -->
+                                </ion-col>
+                            </ion-row>
+
+
+
+                            <ion-row>
+                                <ion-col col-12>
+
+                                    <button ion-button>Save</button>
+                                    
+                                </ion-col>
+                            </ion-row>
+                        </form>
+                    </ion-col>
+                </ion-row>
+            </ion-card-content>
+        </ion-card>
+
+    </div>
+</ion-content>

@@ -1,0 +1,205 @@
+<ion-content>
+
+    <!--header component-->
+    <mainHeader [title]="headerTitle"></mainHeader>
+
+    <div class="bodySection">
+
+        <ion-card>
+
+            <ion-card-header>
+                Attendence
+            </ion-card-header>
+
+
+            <ion-card-content>
+
+                <ion-row>
+                    <ion-col>
+                        <form (ngSubmit)="search(attendenceForm.value)" [formGroup]='attendenceForm'>
+
+                            <ion-row>
+                                <ion-col col-12>
+                                    <label > From</label>
+                                    <date-picker  formControlName="from" format="D/M/YYYY"></date-picker>
+                                    <!-- <ion-datetime displayFormat="DD/MM/YYYY" pickerFormat="DD/MM/YYYY" formControlName='from'></ion-datetime> -->
+                                </ion-col>
+                            </ion-row>
+
+                            <ion-row>
+                                <ion-col col-12>
+                                    <label > To</label>
+                                    <date-picker  formControlName="to" format="D/M/YYYY"></date-picker>
+                                    <!-- <ion-datetime displayFormat="DD/MM/YYYY" pickerFormat="DD/MM/YYYY" formControlName='to'></ion-datetime> -->
+                                </ion-col>
+                            </ion-row>
+
+
+
+                            <ion-row>
+                                <ion-col col-12>
+                                    <button ion-button class="submit-btn" full type="submit" [disabled]="!attendenceForm.valid">
+                                Search
+                                </button>
+
+                                </ion-col>
+                            </ion-row>
+
+
+                        </form>
+                    </ion-col>
+                </ion-row>
+
+
+
+
+
+
+                <ion-row *ngIf="attendenceResponse!=null">
+
+                    <!--present days-->
+                    <ion-grid class="attendenceGrid">
+                        <ion-row class="presentSection">
+                            <ion-col  col-12>Present Days</ion-col>
+                            <ion-col  col-4>Date</ion-col>
+                            <ion-col  col-4>In- Time</ion-col>
+                            <ion-col col-4>Out-Time</ion-col>
+                        </ion-row>
+
+                        <ion-row *ngFor="let day of attendenceResponse.presentDays">
+                            <ion-col col-4>
+                                {{day.date}}
+                            </ion-col>
+                            <ion-col col-4>
+                                {{day.in_time}}
+                            </ion-col>
+                            <ion-col col-4>
+                                {{day.out_time}}
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+
+
+                    <!--leave days-->
+                    <ion-grid class="attendenceGrid">
+                        <ion-row class="leaveSection">
+                            <ion-col  col-12>Leave Days</ion-col>
+                            <ion-col  col-2> From</ion-col>
+                            <ion-col  col-2> To</ion-col>
+                            <ion-col  col-1>Total days</ion-col>
+                            <ion-col  col-3>Reason</ion-col>
+                            <ion-col  col-2>Status</ion-col>
+                            <ion-col  col-2>Approved By</ion-col>
+                        </ion-row>
+                        
+                        <ion-row *ngFor="let day of attendenceResponse.leaveDays">
+
+                            <ion-col col-2>
+                                {{day.leave_from}}
+                            </ion-col>
+                            <ion-col col-2>
+                                {{day.leave_to}}
+                            </ion-col>
+                            <ion-col col-1>
+                                {{day.leave_days}}
+                            </ion-col>
+                            <ion-col col-3>
+                                {{day.leave_reason}}
+                            </ion-col>
+                            <ion-col col-2>
+                                {{day.status}}
+                            </ion-col>
+                            <ion-col col-2>
+                                {{day.approved_by}}
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+
+
+                    <!--half days-->
+                    <ion-grid class="attendenceGrid">
+                        <ion-row class="halfSection">
+                            <ion-col  col-12>Half Days</ion-col>
+                            <ion-col  col-4>Date</ion-col>
+                            <ion-col  col-4>In- Time</ion-col>
+                            <ion-col  col-4>Out-Time</ion-col>
+                        </ion-row>
+                       
+
+                        <ion-row *ngFor="let day of attendenceResponse.halfDays">
+                            <ion-col col-4>
+                                {{day.date}}
+                            </ion-col>
+                            <ion-col col-4>
+                                {{day.in_time}}
+                            </ion-col>
+                            <ion-col col-4>
+                                {{day.out_time}}
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+
+                    <!--late mark days-->
+                    <ion-grid class="attendenceGrid">
+                        <ion-row class="lateMarkSection">
+                            <ion-col  col-12>Latemark Days</ion-col>
+                            <ion-col  col-4>Date</ion-col>
+                            <ion-col  col-4>In-Time</ion-col>
+                            <ion-col  col-4>Out-Time</ion-col>
+                        </ion-row>
+                        
+                        <ion-row *ngFor="let day of attendenceResponse.lateMark">
+                            <ion-col col-4>
+                                {{day.date}}
+                            </ion-col>
+                            <ion-col col-4>
+                                {{day.in_time}}
+                            </ion-col>
+                            <ion-col col-4>
+                                {{day.out_time}}
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+
+
+                    <!--night days-->
+                    <ion-grid class="attendenceGrid">
+                        <ion-row class="nightSection">
+                            <ion-col  col-12>Night Days</ion-col>
+                            <ion-col  col-2>Date</ion-col>
+                            <ion-col  col-2>Comp Name</ion-col>
+                            <ion-col  col-2>Problem</ion-col>
+                            <ion-col  col-2>Call Type</ion-col>
+                            <ion-col  col-2>Status</ion-col>
+                            <ion-col  col-2>Approved By</ion-col>
+                        </ion-row>
+                       
+                        <ion-row *ngFor="let day of attendenceResponse.nightDays">
+                            <ion-col col-2>
+                                {{day.date}}
+                            </ion-col>
+                            <ion-col col-2>
+                                {{day.companyname}}
+                            </ion-col>
+                            <ion-col col-2>
+                                {{day.problem}}
+                            </ion-col>
+                            <ion-col col-2>
+                                {{day.call_type}}
+                            </ion-col>
+                            <ion-col col-2>
+                                {{day.status}}
+                            </ion-col>
+                            <ion-col col-2>
+                                {{day.approved_by}}
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+
+
+                </ion-row>
+
+            </ion-card-content>
+        </ion-card>
+    </div>
+</ion-content>

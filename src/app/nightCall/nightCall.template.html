@@ -1,0 +1,106 @@
+<ion-content>
+
+    <!--header component-->
+    <mainHeader [title]="headerTitle"></mainHeader>
+
+    <div class="bodySection">
+
+        <ion-card>
+
+            <ion-card-header>
+                Night Call
+            </ion-card-header>
+
+
+            <ion-card-content>
+
+                <ion-row>
+                    <ion-col>
+                        <form (ngSubmit)="saveNigtCall(nightCallForm.value)" [formGroup]='nightCallForm'>
+
+                            <ion-row>
+                                <ion-col col-12>
+                                    <label class="frmLabel" (click)='showSearchCompanyModalPopup()'> Company</label>
+                                    <ion-input type="text" [value]="selectedCompany"></ion-input>
+                                    <input type="text" formControlName="comid" style="visibility:hidden">
+
+                                    <a ion-button small (click)='showSearchCompanyModalPopup()'>Search Company</a>
+                                </ion-col>
+                            </ion-row>
+
+                            <ion-row>
+                                <ion-col col-12>
+                                    <label class="frmLabel"> Call Type</label>
+                                    <ion-select formControlName="callType">
+                                        <ion-option value="Local">Local</ion-option>
+                                        <ion-option value="OutStation">OutStation</ion-option>
+                                    </ion-select>
+                                </ion-col>
+                            </ion-row>
+
+                            <ion-row>
+                                <ion-col col-12>
+                                    <label class="frmLabel"> Approvd By</label>
+                                    <textarea formControlName="approvedBy" placeholder="Enter a approved by"  rows="4" >
+                                            </textarea>
+                                    <!-- <ion-textarea placeholder="Enter a approved by" formControlName="approvedBy"></ion-textarea> -->
+                                </ion-col>
+                            </ion-row>
+
+                            <ion-row>
+                                <ion-col col-12>
+                                    <label class="frmLabel"> Problem</label>
+                                    <textarea formControlName="problem" placeholder="Enter a problem"  rows="4" ></textarea>
+                                    <!-- <ion-textarea placeholder="Enter a problem" formControlName="problem"></ion-textarea> -->
+                                </ion-col>
+                            </ion-row>
+
+
+                            <ion-row>
+                                <ion-col col-12>
+                                    <button ion-button class="submit-btn" full type="submit">
+                                Save
+                                </button>
+
+                                </ion-col>
+                            </ion-row>
+
+
+                        </form>
+                    </ion-col>
+                </ion-row>
+
+                <ion-row>
+                    <ion-col col-6>
+                        <h2>Night Call Summary</h2>
+
+                    </ion-col>
+                </ion-row>
+
+                <ion-row>
+                    <ion-col col-12>
+                        <ion-item-group *ngFor="let nightCall of nightCallList">
+
+                            <ion-item-divider [ngClass]="{'pendingNightCall':nightCall.status=='Pending',
+                        'approvedNightCall':nightCall.status=='Approved',
+                    'rejectedNightCall':nightCall.status=='Rejected'}" style="color: #fff">
+                                <h2>{{nightCall.companyname}}</h2>
+                            </ion-item-divider>
+
+                            <ion-item>
+                                <p>Date:- {{nightCall.date}}</p>
+                                <p>Problem:- {{nightCall.problem}}</p>
+                                <p>Call Typ:- {{nightCall.call_type}}</p>
+                                <p>Approved By:- {{nightCall.approved_by}}</p>
+                                <p>Status:- {{nightCall.status}}</p>
+                            </ion-item>
+                        </ion-item-group>
+                    </ion-col>
+                </ion-row>
+
+
+
+            </ion-card-content>
+        </ion-card>
+    </div>
+</ion-content>

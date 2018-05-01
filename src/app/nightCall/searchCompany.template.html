@@ -1,0 +1,60 @@
+<ion-content>
+  <ion-row>
+    <ion-col col-8>
+      
+      <ion-input type="text" placeholder="Enter a company name" [(ngModel)]="searchTerm" >
+      </ion-input>
+    </ion-col>
+
+    <ion-col col-4>
+      <a ion-button small (click)='getItems($event)'>Search Company</a>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col col-12>
+      <ion-list radio-group [(ngModel)]="selectedCompany">
+        <ion-item *ngFor="let company of companyList">
+          <ion-label> {{company.companyname}}</ion-label>
+          <ion-radio [value]="company.comid" (ionSelect)="onChange($event)"></ion-radio>
+        </ion-item>
+      </ion-list>
+    </ion-col>
+  </ion-row>
+</ion-content>
+
+
+<!--<ion-list>
+  <button ion-item *ngFor="let company of companyList" (click)="onChange($event)">
+   
+     {{company.companyname}}
+  </button>
+  
+</ion-list>-->
+<!--<ion-select ionChange="onChange($event)">
+          <ion-option *ngFor="let company of companyList" [value]="company.comid">
+            {{company.companyname}}
+          </ion-option>
+
+        </ion-select>-->
+
+
+
+<!--<ion-content>-->
+<!--<ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>-->
+<!--<ion-input placeholder="Enter a approved by" (change)="getItems($event)"></ion-input>-->
+
+<!--<ion-list >
+          <ion-item *ngFor="let company of companySearchList" >
+            {{company.companyname}}
+          </ion-item>
+        </ion-list>-->
+
+<!--<ion-select ionChange="onChange($event)">
+          <ion-option *ngFor="let company of companyList" [value]="company.comid">
+            {{company.companyname}}
+          </ion-option>
+
+        </ion-select>-->
+
+<!--</ion-content>-->
