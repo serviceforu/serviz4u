@@ -139,6 +139,7 @@ export class MyApp {
             { menuTitle: 'Sales Profit List', menuComponent: SalesListComponent, menuIcon: 'speedometer' },
             { menuTitle: 'Sales Timesheet Form', menuComponent: SalesTimesheetComponent, menuIcon: 'speedometer' },
             { menuTitle: 'Sales Timesheet List', menuComponent: SalesTimeSheetListComponent, menuIcon: 'speedometer' },
+            { menuTitle: 'Dashboard', menuComponent: DashBoardComponent, menuIcon: 'speedometer' },
             { menuTitle: 'Apply Leave', menuComponent: ApplyLeaveComponent, menuIcon: 'train' },
             { menuTitle: 'Attendence Report', menuComponent: AttendenceComponent, menuIcon: 'paper' },
           ];
@@ -147,6 +148,7 @@ export class MyApp {
           this.menuList = [
             { menuTitle: 'DSR Form', menuComponent: AirtelSalesTimesheetComponent, menuIcon: 'speedometer' },
             { menuTitle: 'DSR List', menuComponent: AirtelDSRListComponent, menuIcon: 'speedometer' },
+            { menuTitle: 'Dashboard', menuComponent: DashBoardComponent, menuIcon: 'speedometer' },
             { menuTitle: 'Apply Leave', menuComponent: ApplyLeaveComponent, menuIcon: 'train' },
             { menuTitle: 'Attendence Report', menuComponent: AttendenceComponent, menuIcon: 'paper' },
 
@@ -160,6 +162,7 @@ export class MyApp {
             { menuTitle: 'Apply Leave', menuComponent: ApplyLeaveComponent, menuIcon: 'train' },
             { menuTitle: 'Attendence Report', menuComponent: AttendenceComponent, menuIcon: 'paper' },
             { menuTitle: 'Night Call', menuComponent: NightCallComponent, menuIcon: 'moon' },
+            { menuTitle: 'Dashboard', menuComponent: DashBoardComponent, menuIcon: 'speedometer' },
             //{ menuTitle: 'Log Off', menuComponent: LoginComponent, menuIcon: 'power' }
           ];
           break;

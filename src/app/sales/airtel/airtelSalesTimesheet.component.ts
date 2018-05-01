@@ -193,137 +193,93 @@ export class AirtelSalesTimesheetComponent {
         this.selectedSalesReference = salesRef.source;
 
     }
+
     save(e) {
-
-
-        let latitude: number;
-        let longitude: number;
-        let addressArray: any;
-        let selectedAddress: string = "";
-
-
-        this.geolocation.getCurrentPosition().then(result => {
-
-            latitude = result.coords.latitude;
-            longitude = result.coords.longitude;
-
-            // debugger;
-            this.salesFormRequest = new SalesTimeSheet();
-            this.salesFormRequest.username = this.authService.currentUser.username;
-            this.salesFormRequest.date = new Date().toDateString();//this.salesForm.controls['date'].value;
-
-            this.salesFormRequest.checkin = new Date().toLocaleTimeString();
-            this.salesFormRequest.location = selectedAddress;
-            this.salesFormRequest.latitude = latitude.toString();
-            this.salesFormRequest.longitude = longitude.toString();
-
-            this.salesFormRequest.isp = this.ispName;
-            this.salesFormRequest.company_formate = this.salesForm.controls['companyFormate'].value;
-
-            //this.salesFormRequest.discription = this.salesForm.controls['description'].value;
-
-            if (this.salesFormRequest.company_formate == "new" || this.salesFormRequest.company_formate == "old") {
-                this.salesFormRequest.comid = this.salesForm.controls['comid'].value;
-                this.salesFormRequest.comname = this.companyName;
-                this.salesFormRequest.type = this.companyName;
-            }
-            //this.salesFormRequest.type="";
-            switch (this.salesFormRequest.company_formate) {
-                case "office":
-                    this.salesFormRequest.type = this.selectedOfficeActivity;
-                    break;
-                case "other":
-                    this.salesFormRequest.type = this.selectedOtherActivity;
-                    break;
-                case "travelling":
-                    this.salesFormRequest.type = this.selectedTypeOfTravelling;
-                    break;
-                case "leave":
-                    this.salesFormRequest.type = this.selectedLeaveType;
-                    break;
-                case "cold calling":
-                    this.salesFormRequest.type = this.salesForm.controls['buildingName'].value;
-                    break;
-            }
-
+debugger;
+        if (this.companyFormate !=undefined) {
+            let latitude: number;
+            let longitude: number;
+            let addressArray: any;
+            
             this.errorHandling.ShowLoading();
-            this.salesService.createSalesTimeSheetForAirtel(this.salesFormRequest)
-                .subscribe(result => { },
-                error => { this.errorHandling.ShowError(error, false); },
-                () => {
-                    this.errorHandling.HideLoading();
-                    this.navController.push(AirtelDSRListComponent);
-                })
 
-
-
-
-            // this.ticketService.getAddressDetailByLatAndLong(latitude, longitude)
-            //     .subscribe(resultMap => {
-
-            //         //debugger;
-            //         addressArray = resultMap.json();
-
-            //         selectedAddress = addressArray.results[0].formatted_address;
-
-
-            //     }, error => {
-
-            //         this.errorHandling.ShowError('Kindly try again. Or please check up your GPS settings', false);
-
-
-            //     }, () => {
-            //         // debugger;
-            //         this.salesFormRequest = new SalesTimeSheet();
-            //         this.salesFormRequest.username = this.authService.currentUser.username;
-            //         this.salesFormRequest.date = new Date().toDateString();//this.salesForm.controls['date'].value;
-
-            //         this.salesFormRequest.checkin = new Date().toLocaleTimeString();
-            //         this.salesFormRequest.location = selectedAddress;
-            //         this.salesFormRequest.latitude = latitude.toString();
-            //         this.salesFormRequest.longitude = longitude.toString();
-
-            //         this.salesFormRequest.isp = this.ispName;
-            //         this.salesFormRequest.company_formate = this.salesForm.controls['companyFormate'].value;
-
-            //         //this.salesFormRequest.discription = this.salesForm.controls['description'].value;
-
-            //         if (this.salesFormRequest.company_formate == "new" || this.salesFormRequest.company_formate == "old") {
-            //             this.salesFormRequest.comid = this.salesForm.controls['comid'].value;
-            //             this.salesFormRequest.comname = this.companyName;
-            //             this.salesFormRequest.type = this.companyName;
-            //         }
-            //         //this.salesFormRequest.type="";
-            //         switch (this.salesFormRequest.company_formate) {
-            //             case "office":
-            //                 this.salesFormRequest.type = this.selectedOfficeActivity;
-            //                 break;
-            //             case "other":
-            //                 this.salesFormRequest.type = this.selectedOtherActivity;
-            //                 break;
-            //             case "travelling":
-            //                 this.salesFormRequest.type = this.selectedTypeOfTravelling;
-            //                 break;
-            //             case "leave":
-            //                 this.salesFormRequest.type = this.selectedLeaveType;
-            //                 break;
-            //         }
-
-            //         this.errorHandling.ShowLoading();
-            //         this.salesService.createSalesTimeSheetForAirtel(this.salesFormRequest)
-            //             .subscribe(result => { },
-            //             error => { this.errorHandling.ShowError(error, false); },
-            //             () => {
-            //                 this.errorHandling.HideLoading();
-            //                 this.navController.push(AirtelDSRListComponent);
-            //             })
-
-
-            //     });
-
-        });
+            this.getLocation();
+        }
+        else {
+            this.errorHandling.ShowError("Select Company Format",false);
+        }
     }
 
+    getLocation()
+    { 
+        this.geolocation.getCurrentPosition()
+        .then(result => { this.onSuccessGetLocation(result); })
+        .catch((error) => { this.onErrorGetLocation(error) });
+    }
+
+    onSuccessGetLocation(result) {
+
+        let latitude = result.coords.latitude;
+        let longitude = result.coords.longitude;
+
+        // debugger;
+        this.salesFormRequest = new SalesTimeSheet();
+        this.salesFormRequest.username = this.authService.currentUser.username;
+        this.salesFormRequest.date = new Date().toDateString();//this.salesForm.controls['date'].value;
+
+        this.salesFormRequest.checkin = new Date().toLocaleTimeString();
+        //this.salesFormRequest.location = selectedAddress;
+        this.salesFormRequest.latitude = latitude.toString();
+        this.salesFormRequest.longitude = longitude.toString();
+
+        this.salesFormRequest.isp = this.ispName;
+        this.salesFormRequest.company_formate = this.salesForm.controls['companyFormate'].value;
+
+        //this.salesFormRequest.discription = this.salesForm.controls['description'].value;
+
+        if (this.salesFormRequest.company_formate == "new" || this.salesFormRequest.company_formate == "old") {
+            this.salesFormRequest.comid = this.salesForm.controls['comid'].value;
+            this.salesFormRequest.comname = this.companyName;
+            this.salesFormRequest.type = this.companyName;
+        }
+        //this.salesFormRequest.type="";
+        switch (this.salesFormRequest.company_formate) {
+            case "office":
+                this.salesFormRequest.type = this.selectedOfficeActivity;
+                break;
+            case "other":
+                this.salesFormRequest.type = this.selectedOtherActivity;
+                break;
+            case "travelling":
+                this.salesFormRequest.type = this.selectedTypeOfTravelling;
+                break;
+            case "leave":
+                this.salesFormRequest.type = this.selectedLeaveType;
+                break;
+            case "cold calling":
+                this.salesFormRequest.type = this.salesForm.controls['buildingName'].value;
+                break;
+        }
+
+
+        this.salesService.createSalesTimeSheetForAirtel(this.salesFormRequest)
+            .subscribe(result => { },
+            error => { this.errorHandling.ShowError(error, false); },
+            () => {
+                this.errorHandling.HideLoading();
+                this.navController.push(AirtelDSRListComponent);
+            })
+    }
+
+    onErrorGetLocation(e) {
+        if (confirm("Error getting location, Can we retry?")) {
+            this.getLocation();
+        }
+        else {
+            this.errorHandling.HideLoading();
+           }
+
+    }
 
     getItems(ev: any) {
 

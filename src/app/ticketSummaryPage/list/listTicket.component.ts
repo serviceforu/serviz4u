@@ -97,7 +97,7 @@ export class ListTicketComponent {
 
     checkIn(selectedTicket: any) {
 
-        debugger;
+        //debugger;
         let latitude: number;
         let longitude: number;
         let addressArray: any;
@@ -138,7 +138,7 @@ export class ListTicketComponent {
     }
 
     onSuccessGetCurrentLocation(result, selectedTicket) {
-        debugger;
+        //debugger;
         let latitude: number;
         let longitude: number;
         let addressArray: any;
@@ -172,7 +172,7 @@ export class ListTicketComponent {
         this.ticketService.checkIn(this.selectedCheckIn)
             .subscribe(result => {
 
-                debugger;
+                //debugger;
                 let responseBody = result.json();
 
                 if (responseBody.Status == 1) {
@@ -185,8 +185,6 @@ export class ListTicketComponent {
                 }
                 else {
                     this.errorHandling.ShowError(responseBody.Message);
-
-
                 }
 
             }, errr => {
@@ -197,14 +195,6 @@ export class ListTicketComponent {
                 this.errorHandling.HideLoading();
 
             });
-
-        // })
-        // .catch((error) => {
-
-        //     this.onErrorGetCurrentLocation(error, selectedTicket);
-        // });
-
-
     }
 
     onErrorGetCurrentLocation(error, selectedTicket) {

@@ -33,24 +33,26 @@
 
                             <ion-row>
                                 <ion-col col-12>
-                                    <label class="frmLabel"> Company Formate</label>
+                                    <label class="frmLabel"> Company Formate</label><label class="frmLabelRequired" style="color:red"> *</label>
                                     <ion-select formControlName="companyFormate" interface="popover" [(ngModel)]="companyFormate">
 
                                         <!-- <ion-option value="old" (ionSelect)='onCustomerFormateChange("old")'>Old</ion-option> -->
 
-                                        <ion-option value="new" (ionSelect)='onCustomerFormateChange("new")'>New</ion-option>
+                                        <ion-option value="new" (ionSelect)='onCustomerFormateChange("new")'>Select Company</ion-option>
 
-                                        <ion-option value="first_time" (ionSelect)='onCustomerFormateChange("first_time")'>First Time</ion-option>
+                                        <ion-option value="first_time" (ionSelect)='onCustomerFormateChange("first_time")'>Create New Company</ion-option>
+
+                                        <ion-option value="cold calling" (ionSelect)='onCustomerFormateChange("cold calling")'>Cold Calling</ion-option>
 
                                         <ion-option value="office" (ionSelect)='onCustomerFormateChange("office")'>Office</ion-option>
 
                                         <ion-option value="travelling" (ionSelect)='onCustomerFormateChange("travelling")'>Travelling</ion-option>
 
-                                        <ion-option value="other" (ionSelect)='onCustomerFormateChange("other")'>Other</ion-option>
+                                        <!-- <ion-option value="other" (ionSelect)='onCustomerFormateChange("other")'>Other</ion-option> -->
 
-                                        <ion-option value="leave" (ionSelect)='onCustomerFormateChange("leave")'>Leave</ion-option>
+                                        <!-- <ion-option value="leave" (ionSelect)='onCustomerFormateChange("leave")'>Leave</ion-option> -->
 
-                                        <ion-option value="cold calling" (ionSelect)='onCustomerFormateChange("cold calling")'>Cold Calling</ion-option>
+                                        
 
                                     </ion-select>
                                 </ion-col>

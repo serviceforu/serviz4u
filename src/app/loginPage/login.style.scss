@@ -7,7 +7,7 @@ height: 45px;
 float: left;
 }
 .logoContent{
-background: white;
+// background: white;
 border-radius: 25%;
 }
 
@@ -16,7 +16,7 @@ page-login {
  
   .login-content {
     //background: #56CA96;
-    background: #0a939d;
+    background:#0a939d;// #09939D;
 
     .logo-row {
       padding-top: 50px;
@@ -25,9 +25,9 @@ page-login {
  
     .login-box {
       //background: #399F8B;
-      background: #7a8990;
-      padding: 20px 20px 0px 20px;
-      margin-top: 30px;
+      // background: #7a8990;
+      // padding: 20px 20px 0px 20px;
+      // margin-top: 30px;
     }
  
     ion-row {
@@ -56,9 +56,10 @@ page-login {
      }
  
      .submit-btn {
-       background: #0a939d;
+       background-color: rgba(18, 17, 17, 0.98);//#0a939d;
        border-radius: 30px !important;
-       border: 1px solid #ffffff;
+      //  border: 1px solid #ffffff;
+       color:white;
      }
  
      .register-btn {

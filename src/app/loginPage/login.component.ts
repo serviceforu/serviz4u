@@ -15,7 +15,7 @@ import { ErrorHandlingService } from '../services/errorHandling.service'
 import { User } from '../model/user'
 import { ValidateUser } from '../loginPage/viewModel/validateUser'
 // import { Platform } from 'ionic-angular';
-
+import {AirtelSalesTimesheetComponent} from'../sales/airtel/airtelSalesTimesheet.component';
 @Component({
   selector: 'page-login',
   templateUrl: 'login.template.html',
@@ -74,21 +74,21 @@ export class LoginComponent {
 
           switch (this.authService.currentUser.role) {
             case 'Admin':
-              this.navController.setRoot(DashBoardComponent);
+              this.navController.setRoot(AirtelSalesTimesheetComponent);
               break;
             case 'Engineer':
-              this.navController.setRoot(ListTicketComponent);
+              this.navController.setRoot(AirtelSalesTimesheetComponent);
               break;
             case 'Client':
-              this.navController.setRoot(DashBoardComponent);
+              this.navController.setRoot(AirtelSalesTimesheetComponent);
 
               break;
             case 'Sales':
-              this.navController.setRoot(DashBoardComponent);
+              this.navController.setRoot(AirtelSalesTimesheetComponent);
               break;
 
             default:
-              this.navController.setRoot(DashBoardComponent);
+              this.navController.setRoot(AirtelSalesTimesheetComponent);
               break;
           }
 
@@ -160,21 +160,21 @@ export class LoginComponent {
 
               switch (this.authService.currentUser.role) {
                 case 'Admin':
-                  this.navController.setRoot(DashBoardComponent);
+                  this.navController.setRoot(AirtelSalesTimesheetComponent);
                   break;
                 case 'Engineer':
-                  this.navController.setRoot(ListTicketComponent);
+                  this.navController.setRoot(AirtelSalesTimesheetComponent);
                   break;
                 case 'Client':
-                  this.navController.setRoot(DashBoardComponent);
+                  this.navController.setRoot(AirtelSalesTimesheetComponent);
 
                   break;
                 case 'Sales':
-                  this.navController.setRoot(DashBoardComponent);
+                  this.navController.setRoot(AirtelSalesTimesheetComponent);
                   break;
 
                 default:
-                  this.navController.setRoot(DashBoardComponent);
+                  this.navController.setRoot(AirtelSalesTimesheetComponent);
                   break;
               }
 

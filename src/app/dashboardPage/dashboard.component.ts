@@ -8,7 +8,8 @@ import { TicketService } from '../services/ticket.service'
 import { ErrorHandlingService } from '../services/errorHandling.service'
 import { Dashboard } from '../dashboardPage/viewModel/dashboard'
 import { TicketListAdminComponent } from '../admin/manageTicket/listTicket/ticketListAdmin.component'
-import { ListTicketComponent } from '../ticketSummaryPage/list/listTicket.component'
+import { ListTicketComponent } from '../ticketSummaryPage/list/listTicket.component';
+import { AirtelDSRListComponent } from '../sales/airtel/list/airtelDSRList.component'
 @Component({
     selector: 'dashboard',
     templateUrl: 'dashboard.template.html',
@@ -60,12 +61,12 @@ export class DashBoardComponent implements OnInit {
                 let responseData = result.json();
                 if (responseData.Status == "true") {
                     this.dashbord = new Dashboard();
-                    this.dashbord.close = responseData.Data.close;
-                    this.dashbord.pending = responseData.Data.pending;
-                    this.dashbord.hwProb = responseData.Data.hwProb;
-                    this.dashbord.inProg = responseData.Data.inProg;
-                    this.dashbord.iCantDoIt = responseData.Data.iCantDoIt;
-                    this.dashbord.open = '0';
+                    this.dashbord.action = responseData.Data.action;
+                    // this.dashbord.pending = responseData.Data.pending;
+                    // this.dashbord.hwProb = responseData.Data.hwProb;
+                    // this.dashbord.inProg = responseData.Data.inProg;
+                    // this.dashbord.iCantDoIt = responseData.Data.iCantDoIt;
+                    // this.dashbord.open = '0';
 
                 }
 
@@ -75,14 +76,21 @@ export class DashBoardComponent implements OnInit {
 
     GoToManageTicket(status: string) {
 
-        if (this.user.role == 'Admin') {
-            this.navControler.push(TicketListAdminComponent, { status: status });
-            //this.navControler.push(TicketListAdminComponent)
+        switch (status) {
+            case 'dsr':
+                this.navControler.push(AirtelDSRListComponent, { status: status });
+                break;
+            case 'funnel':
+                this.errorHandling.ShowError("Under Construction", false);
+                //this.navControler.push(TicketListAdminComponent, { status: status });
+                break;
+            case 'quotation':
+                this.errorHandling.ShowError("Under Construction", false);
+                //this.navControler.push(TicketListAdminComponent, { status: status });
+                break;
+
         }
-        else {
-            //this.navControler.setRoot(ListTicketComponent,{status:status});
-            this.navControler.push(ListTicketComponent, { status: status });
-        }
+
 
     }
 
