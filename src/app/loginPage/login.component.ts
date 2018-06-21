@@ -5,7 +5,7 @@ import { NavController, AlertController, LoadingController, Loading } from 'ioni
 import { Storage } from '@ionic/storage';
 
 
-import { DashBoardComponent } from '../dashboardPage/dashboard.component'
+//import { DashBoardComponent } from '../dashboardPage/dashboard.component'
 import { TicketListAdminComponent } from '../admin/manageTicket/ticketListAdmin.component'
 import { ListTicketComponent } from '../ticketSummaryPage/list/listTicket.component';
 import { MyApp } from '../app.component';
@@ -15,13 +15,13 @@ import { ErrorHandlingService } from '../services/errorHandling.service'
 import { User } from '../model/user'
 import { ValidateUser } from '../loginPage/viewModel/validateUser'
 // import { Platform } from 'ionic-angular';
-import {AirtelSalesTimesheetComponent} from'../sales/airtel/airtelSalesTimesheet.component';
+//import { AirtelSalesTimesheetComponent } from '../sales/airtel/airtelSalesTimesheet.component';
+import { AirtelDSRListComponent } from '../sales/airtel/list/airtelDSRList.component';
+
 @Component({
   selector: 'page-login',
   templateUrl: 'login.template.html',
 })
-
-
 
 export class LoginComponent {
   loading: Loading;
@@ -36,7 +36,7 @@ export class LoginComponent {
     private injector: Injector,
     private storage: Storage,
     private errorHandling: ErrorHandlingService
-   
+
   ) {
 
     //debugger;
@@ -74,21 +74,21 @@ export class LoginComponent {
 
           switch (this.authService.currentUser.role) {
             case 'Admin':
-              this.navController.setRoot(AirtelSalesTimesheetComponent);
+              this.navController.setRoot(AirtelDSRListComponent);
               break;
             case 'Engineer':
-              this.navController.setRoot(AirtelSalesTimesheetComponent);
+              this.navController.setRoot(AirtelDSRListComponent);
               break;
             case 'Client':
-              this.navController.setRoot(AirtelSalesTimesheetComponent);
+              this.navController.setRoot(AirtelDSRListComponent);
 
               break;
             case 'Sales':
-              this.navController.setRoot(AirtelSalesTimesheetComponent);
+              this.navController.setRoot(AirtelDSRListComponent);
               break;
 
             default:
-              this.navController.setRoot(AirtelSalesTimesheetComponent);
+              this.navController.setRoot(AirtelDSRListComponent);
               break;
           }
 
@@ -160,21 +160,21 @@ export class LoginComponent {
 
               switch (this.authService.currentUser.role) {
                 case 'Admin':
-                  this.navController.setRoot(AirtelSalesTimesheetComponent);
+                  this.navController.setRoot(AirtelDSRListComponent);
                   break;
                 case 'Engineer':
-                  this.navController.setRoot(AirtelSalesTimesheetComponent);
+                  this.navController.setRoot(AirtelDSRListComponent);
                   break;
                 case 'Client':
-                  this.navController.setRoot(AirtelSalesTimesheetComponent);
+                  this.navController.setRoot(AirtelDSRListComponent);
 
                   break;
                 case 'Sales':
-                  this.navController.setRoot(AirtelSalesTimesheetComponent);
+                  this.navController.setRoot(AirtelDSRListComponent);
                   break;
 
                 default:
-                  this.navController.setRoot(AirtelSalesTimesheetComponent);
+                  this.navController.setRoot(AirtelDSRListComponent);
                   break;
               }
 
@@ -184,8 +184,7 @@ export class LoginComponent {
             this.errorHandling.ShowError('Access Denied', false);
 
           }
-        },
-        error => {
+        }, error => {
 
           this.errorHandling.ShowError(error, false);
         });

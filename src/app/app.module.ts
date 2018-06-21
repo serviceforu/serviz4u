@@ -36,13 +36,14 @@ import {ErrorHandlingService} from '../app/services/errorHandling.service'
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-
+import { Dialogs } from '@ionic-native/dialogs';
 
 import {AirtelSalesTimesheetComponent} from '../app/sales/airtel/airtelSalesTimesheet.component'
 import {AirtelDSRListComponent} from '../app/sales/airtel/list/airtelDSRList.component'
 import {AirtelDSRDetailComponent} from '../app/sales/airtel/detail/airtelDSRDetail.component'
+import {FunnelListComponent} from '../app/funnel/list/funnelList.component';
+import {FunnelAddComponent} from '../app/funnel/add/funnelAdd.component';
 
-//import { WeekPipe } from '../app/sales/week.pipe';
 @NgModule({
   declarations: [
     MyApp,
@@ -66,7 +67,9 @@ import {AirtelDSRDetailComponent} from '../app/sales/airtel/detail/airtelDSRDeta
    SalesTimesheetDetailComponent,
    AirtelSalesTimesheetComponent,
    AirtelDSRListComponent,
-   AirtelDSRDetailComponent
+   AirtelDSRDetailComponent,
+   FunnelListComponent,
+   FunnelAddComponent
   ],
   imports: [
     BrowserModule,
@@ -75,7 +78,8 @@ import {AirtelDSRDetailComponent} from '../app/sales/airtel/detail/airtelDSRDeta
     HttpModule,
     IonicStorageModule.forRoot(),
     DatePickerModule,
-    OverlayModule
+    OverlayModule,
+
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -99,7 +103,9 @@ import {AirtelDSRDetailComponent} from '../app/sales/airtel/detail/airtelDSRDeta
     SalesTimesheetDetailComponent,
     AirtelSalesTimesheetComponent,
     AirtelDSRListComponent,
-    AirtelDSRDetailComponent
+    AirtelDSRDetailComponent,
+    FunnelListComponent,
+    FunnelAddComponent
   ],
   providers: [
     StatusBar,
@@ -110,7 +116,8 @@ import {AirtelDSRDetailComponent} from '../app/sales/airtel/detail/airtelDSRDeta
     NativeGeocoder,
     LocationAccuracy,
     ErrorHandlingService,
-    DatePicker
+    DatePicker,
+    Dialogs
   ]
 })
 export class AppModule {}

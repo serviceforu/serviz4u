@@ -9,14 +9,26 @@
 
             <ion-card-header>
 
-                Sales DSR Report
+                <ion-row>
+                    <ion-col col-6 no-padding>
+                        Sales DSR Report
+                    </ion-col>
+                    <ion-col col-6 no-padding float-right text-right>
+                        <button ion-button round (click)="onAdd($event)">Add</button>
+                    </ion-col>
+                </ion-row>
+
+
             </ion-card-header>
 
             <ion-card-content>
 
                 <ion-card *ngFor='let sales of salesTimeSheetList'>
 
-                    <ion-card-header (click)="showSelectedSalesDetailModal(sales)">
+                    
+                    <ion-card-header (click)="showSelectedSalesDetailModal(sales)" 
+                    [style.background-color]="(sales.date|date)==(currentDate|date)?'#009688':'red'"
+                    >
 
                         <ion-grid>
 

@@ -18,7 +18,7 @@ import { SalesTimesheetComponent } from '../app/sales/salesTimesheet/salesTimesh
 import { SalesTimeSheetListComponent } from '../app/sales/salesTimesheet/list/salesTimeSheetList.component'
 import { AirtelSalesTimesheetComponent } from '../app/sales/airtel/airtelSalesTimesheet.component'
 import { AirtelDSRListComponent } from '../app/sales/airtel/list/airtelDSRList.component'
-
+import { FunnelListComponent } from '../app/funnel/list/funnelList.component';
 import { AuthenticationService } from '../app/services/authentication.service'
 
 import { ApplyLeaveComponent } from '../app/applyLeave/applyLeave.component'
@@ -42,7 +42,8 @@ export class MyApp {
   constructor(
     public authService: AuthenticationService,
     public alert: AlertController,
-    public storage: Storage, platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen
+    public storage: Storage,
+    public platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen
   ) {
 
     platform.ready().then(() => {
@@ -63,9 +64,12 @@ export class MyApp {
 
     platform.registerBackButtonAction(() => {
       if (this.nav.canGoBack()) { // CHECK IF THE USER IS IN THE ROOT PAGE.
+
         this.nav.pop(); // IF IT'S NOT THE ROOT, POP A PAGE.
       } else {
-        platform.exitApp(); // IF IT'S THE ROOT, EXIT THE APP.
+
+        this.exit('');
+        //platform.exitApp(); // IF IT'S THE ROOT, EXIT THE APP.
       }
     });
 
@@ -85,85 +89,136 @@ export class MyApp {
         case 'Admin':
           this.menuList = [
             { menuTitle: 'Dashboard', menuComponent: DashBoardComponent, menuIcon: 'speedometer' },
-            { menuTitle: 'Manage Tickets', menuComponent: TicketListAdminComponent, menuIcon: 'stats' },
+            //{ menuTitle: 'DSR Form', menuComponent: AirtelSalesTimesheetComponent, menuIcon: 'speedometer' },
+            { menuTitle: 'DSR List', menuComponent: AirtelDSRListComponent, menuIcon: 'speedometer' },
+            { menuTitle: 'Funnel List', menuComponent: FunnelListComponent, menuIcon: 'funnel' },
             { menuTitle: 'Apply Leave', menuComponent: ApplyLeaveComponent, menuIcon: 'train' },
             { menuTitle: 'Attendence Report', menuComponent: AttendenceComponent, menuIcon: 'paper' },
-            { menuTitle: 'Sales Profit Form', menuComponent: SalesComponent, menuIcon: 'speedometer' },
-            { menuTitle: 'Sales Profit List', menuComponent: SalesListComponent, menuIcon: 'speedometer' },
-            { menuTitle: 'Sales Timesheet Form', menuComponent: SalesTimesheetComponent, menuIcon: 'speedometer' },
-            { menuTitle: 'Sales Timesheet List', menuComponent: SalesTimeSheetListComponent, menuIcon: 'speedometer' },
-            { menuTitle: 'DSR Form', menuComponent: AirtelSalesTimesheetComponent, menuIcon: 'speedometer' },
-            { menuTitle: 'DSR List', menuComponent: AirtelDSRListComponent, menuIcon: 'speedometer' }
+            //{ menuTitle: 'Manage Tickets', menuComponent: TicketListAdminComponent, menuIcon: 'stats' },
+            //{ menuTitle: 'Sales Profit Form', menuComponent: SalesComponent, menuIcon: 'speedometer' },
+            //{ menuTitle: 'Sales Profit List', menuComponent: SalesListComponent, menuIcon: 'speedometer' },
+            //{ menuTitle: 'Sales Timesheet Form', menuComponent: SalesTimesheetComponent, menuIcon: 'speedometer' },
+            //{ menuTitle: 'Sales Timesheet List', menuComponent: SalesTimeSheetListComponent, menuIcon: 'speedometer' },
           ];
           break;
         case 'Superuser':
           this.menuList = [
             { menuTitle: 'Dashboard', menuComponent: DashBoardComponent, menuIcon: 'speedometer' },
-            { menuTitle: 'Manage Tickets', menuComponent: TicketListAdminComponent, menuIcon: 'stats' },
-            { menuTitle: 'Ticket Summary', menuComponent: ListTicketComponent, menuIcon: 'stats' },
+            //{ menuTitle: 'DSR Form', menuComponent: AirtelSalesTimesheetComponent, menuIcon: 'speedometer' },
+            { menuTitle: 'DSR List', menuComponent: AirtelDSRListComponent, menuIcon: 'speedometer' },
+            { menuTitle: 'Funnel List', menuComponent: FunnelListComponent, menuIcon: 'funnel' },
             { menuTitle: 'Apply Leave', menuComponent: ApplyLeaveComponent, menuIcon: 'train' },
             { menuTitle: 'Attendence Report', menuComponent: AttendenceComponent, menuIcon: 'paper' },
+
+            // { menuTitle: 'Dashboard', menuComponent: DashBoardComponent, menuIcon: 'speedometer' },
+            // { menuTitle: 'Manage Tickets', menuComponent: TicketListAdminComponent, menuIcon: 'stats' },
+            // { menuTitle: 'Ticket Summary', menuComponent: ListTicketComponent, menuIcon: 'stats' },
+            // { menuTitle: 'Apply Leave', menuComponent: ApplyLeaveComponent, menuIcon: 'train' },
+            // { menuTitle: 'Attendence Report', menuComponent: AttendenceComponent, menuIcon: 'paper' },
 
           ];
           break;
         case 'Teamleader':
           this.menuList = [
             { menuTitle: 'Dashboard', menuComponent: DashBoardComponent, menuIcon: 'speedometer' },
-            { menuTitle: 'Manage Tickets', menuComponent: TicketListAdminComponent, menuIcon: 'stats' },
-            { menuTitle: 'Ticket Summary', menuComponent: ListTicketComponent, menuIcon: 'stats' },
+            //{ menuTitle: 'DSR Form', menuComponent: AirtelSalesTimesheetComponent, menuIcon: 'speedometer' },
+            { menuTitle: 'DSR List', menuComponent: AirtelDSRListComponent, menuIcon: 'speedometer' },
+            { menuTitle: 'Funnel List', menuComponent: FunnelListComponent, menuIcon: 'funnel' },
             { menuTitle: 'Apply Leave', menuComponent: ApplyLeaveComponent, menuIcon: 'train' },
             { menuTitle: 'Attendence Report', menuComponent: AttendenceComponent, menuIcon: 'paper' },
+
+            // { menuTitle: 'Dashboard', menuComponent: DashBoardComponent, menuIcon: 'speedometer' },
+            // { menuTitle: 'Manage Tickets', menuComponent: TicketListAdminComponent, menuIcon: 'stats' },
+            // { menuTitle: 'Ticket Summary', menuComponent: ListTicketComponent, menuIcon: 'stats' },
+            // { menuTitle: 'Apply Leave', menuComponent: ApplyLeaveComponent, menuIcon: 'train' },
+            // { menuTitle: 'Attendence Report', menuComponent: AttendenceComponent, menuIcon: 'paper' },
 
           ];
           break;
         case 'Engineer':
           this.menuList = [
-            { menuTitle: 'Ticket Summary', menuComponent: ListTicketComponent, menuIcon: 'stats' },
             { menuTitle: 'Dashboard', menuComponent: DashBoardComponent, menuIcon: 'speedometer' },
+            //{ menuTitle: 'DSR Form', menuComponent: AirtelSalesTimesheetComponent, menuIcon: 'speedometer' },
+            { menuTitle: 'DSR List', menuComponent: AirtelDSRListComponent, menuIcon: 'speedometer' },
+            { menuTitle: 'Funnel List', menuComponent: FunnelListComponent, menuIcon: 'funnel' },
             { menuTitle: 'Apply Leave', menuComponent: ApplyLeaveComponent, menuIcon: 'train' },
             { menuTitle: 'Attendence Report', menuComponent: AttendenceComponent, menuIcon: 'paper' },
-            { menuTitle: 'Night Call', menuComponent: NightCallComponent, menuIcon: 'moon' },
-            //{ menuTitle: 'Log Off', menuComponent: LoginComponent, menuIcon: 'power' }
+
+            // { menuTitle: 'Ticket Summary', menuComponent: ListTicketComponent, menuIcon: 'stats' },
+            // { menuTitle: 'Dashboard', menuComponent: DashBoardComponent, menuIcon: 'speedometer' },
+            // { menuTitle: 'Apply Leave', menuComponent: ApplyLeaveComponent, menuIcon: 'train' },
+            // { menuTitle: 'Attendence Report', menuComponent: AttendenceComponent, menuIcon: 'paper' },
+            // { menuTitle: 'Night Call', menuComponent: NightCallComponent, menuIcon: 'moon' },
+            // //{ menuTitle: 'Log Off', menuComponent: LoginComponent, menuIcon: 'power' }
           ];
           break;
         case 'Client':
           this.menuList = [
             { menuTitle: 'Dashboard', menuComponent: DashBoardComponent, menuIcon: 'speedometer' },
-            { menuTitle: 'Ticket Summary', menuComponent: ListTicketComponent, menuIcon: 'speedometer' },
+            //{ menuTitle: 'DSR Form', menuComponent: AirtelSalesTimesheetComponent, menuIcon: 'speedometer' },
+            { menuTitle: 'DSR List', menuComponent: AirtelDSRListComponent, menuIcon: 'speedometer' },
+            { menuTitle: 'Funnel List', menuComponent: FunnelListComponent, menuIcon: 'funnel' },
+            { menuTitle: 'Apply Leave', menuComponent: ApplyLeaveComponent, menuIcon: 'train' },
+            { menuTitle: 'Attendence Report', menuComponent: AttendenceComponent, menuIcon: 'paper' },
+
+            // { menuTitle: 'Dashboard', menuComponent: DashBoardComponent, menuIcon: 'speedometer' },
+            // { menuTitle: 'Ticket Summary', menuComponent: ListTicketComponent, menuIcon: 'speedometer' },
             //{ menuTitle: 'Log Off', menuComponent: LoginComponent, menuIcon: 'speedometer' }
           ];
           break;
         case 'Sales':
           this.menuList = [
-            { menuTitle: 'Sales Profit Form', menuComponent: SalesComponent, menuIcon: 'speedometer' },
-            { menuTitle: 'Sales Profit List', menuComponent: SalesListComponent, menuIcon: 'speedometer' },
-            { menuTitle: 'Sales Timesheet Form', menuComponent: SalesTimesheetComponent, menuIcon: 'speedometer' },
-            { menuTitle: 'Sales Timesheet List', menuComponent: SalesTimeSheetListComponent, menuIcon: 'speedometer' },
             { menuTitle: 'Dashboard', menuComponent: DashBoardComponent, menuIcon: 'speedometer' },
+            //{ menuTitle: 'DSR Form', menuComponent: AirtelSalesTimesheetComponent, menuIcon: 'speedometer' },
+            { menuTitle: 'DSR List', menuComponent: AirtelDSRListComponent, menuIcon: 'speedometer' },
+            { menuTitle: 'Funnel List', menuComponent: FunnelListComponent, menuIcon: 'funnel' },
             { menuTitle: 'Apply Leave', menuComponent: ApplyLeaveComponent, menuIcon: 'train' },
             { menuTitle: 'Attendence Report', menuComponent: AttendenceComponent, menuIcon: 'paper' },
+
+            // { menuTitle: 'Sales Profit Form', menuComponent: SalesComponent, menuIcon: 'speedometer' },
+            // { menuTitle: 'Sales Profit List', menuComponent: SalesListComponent, menuIcon: 'speedometer' },
+            // { menuTitle: 'Sales Timesheet Form', menuComponent: SalesTimesheetComponent, menuIcon: 'speedometer' },
+            // { menuTitle: 'Sales Timesheet List', menuComponent: SalesTimeSheetListComponent, menuIcon: 'speedometer' },
+            // { menuTitle: 'Funnel List', menuComponent: FunnelListComponent, menuIcon: 'funnel' },
+            // { menuTitle: 'Dashboard', menuComponent: DashBoardComponent, menuIcon: 'speedometer' },
+            // { menuTitle: 'Apply Leave', menuComponent: ApplyLeaveComponent, menuIcon: 'train' },
+            // { menuTitle: 'Attendence Report', menuComponent: AttendenceComponent, menuIcon: 'paper' },
           ];
           break;
         case 'Airtel_Sales':
           this.menuList = [
-            { menuTitle: 'DSR Form', menuComponent: AirtelSalesTimesheetComponent, menuIcon: 'speedometer' },
-            { menuTitle: 'DSR List', menuComponent: AirtelDSRListComponent, menuIcon: 'speedometer' },
             { menuTitle: 'Dashboard', menuComponent: DashBoardComponent, menuIcon: 'speedometer' },
+            //{ menuTitle: 'DSR Form', menuComponent: AirtelSalesTimesheetComponent, menuIcon: 'speedometer' },
+            { menuTitle: 'DSR List', menuComponent: AirtelDSRListComponent, menuIcon: 'speedometer' },
+            { menuTitle: 'Funnel List', menuComponent: FunnelListComponent, menuIcon: 'funnel' },
             { menuTitle: 'Apply Leave', menuComponent: ApplyLeaveComponent, menuIcon: 'train' },
             { menuTitle: 'Attendence Report', menuComponent: AttendenceComponent, menuIcon: 'paper' },
+
+            // { menuTitle: 'DSR Form', menuComponent: AirtelSalesTimesheetComponent, menuIcon: 'speedometer' },
+            // { menuTitle: 'DSR List', menuComponent: AirtelDSRListComponent, menuIcon: 'speedometer' },
+            // { menuTitle: 'Funnel List', menuComponent: FunnelListComponent, menuIcon: 'funnel' },
+            // { menuTitle: 'Dashboard', menuComponent: DashBoardComponent, menuIcon: 'speedometer' },
+            // { menuTitle: 'Apply Leave', menuComponent: ApplyLeaveComponent, menuIcon: 'train' },
+            // { menuTitle: 'Attendence Report', menuComponent: AttendenceComponent, menuIcon: 'paper' },
 
           ];
           break;
 
         default:
           this.menuList = [
-            { menuTitle: 'Ticket Summary', menuComponent: ListTicketComponent, menuIcon: 'stats' },
             { menuTitle: 'Dashboard', menuComponent: DashBoardComponent, menuIcon: 'speedometer' },
+            // { menuTitle: 'DSR Form', menuComponent: AirtelSalesTimesheetComponent, menuIcon: 'speedometer' },
+            { menuTitle: 'DSR List', menuComponent: AirtelDSRListComponent, menuIcon: 'speedometer' },
+            { menuTitle: 'Funnel List', menuComponent: FunnelListComponent, menuIcon: 'funnel' },
             { menuTitle: 'Apply Leave', menuComponent: ApplyLeaveComponent, menuIcon: 'train' },
             { menuTitle: 'Attendence Report', menuComponent: AttendenceComponent, menuIcon: 'paper' },
-            { menuTitle: 'Night Call', menuComponent: NightCallComponent, menuIcon: 'moon' },
-            { menuTitle: 'Dashboard', menuComponent: DashBoardComponent, menuIcon: 'speedometer' },
-            //{ menuTitle: 'Log Off', menuComponent: LoginComponent, menuIcon: 'power' }
+            // { menuTitle: 'Ticket Summary', menuComponent: ListTicketComponent, menuIcon: 'stats' },
+            // { menuTitle: 'Dashboard', menuComponent: DashBoardComponent, menuIcon: 'speedometer' },
+            // { menuTitle: 'Apply Leave', menuComponent: ApplyLeaveComponent, menuIcon: 'train' },
+            // { menuTitle: 'Attendence Report', menuComponent: AttendenceComponent, menuIcon: 'paper' },
+            // { menuTitle: 'Night Call', menuComponent: NightCallComponent, menuIcon: 'moon' },
+            // { menuTitle: 'Dashboard', menuComponent: DashBoardComponent, menuIcon: 'speedometer' },
+            // //{ menuTitle: 'Log Off', menuComponent: LoginComponent, menuIcon: 'power' }
           ];
           break;
 
@@ -188,22 +243,22 @@ export class MyApp {
 
   }
 
-  // exit(s: any) {
-  //   let alert = this.alert.create({
-  //     title: 'Confirm',
-  //     message: 'Do you want to exit?',
-  //     buttons: [{
-  //       text: "exit?",
-  //       handler: () => { this.exitApp() }
-  //     }, {
-  //       text: "Cancel",
-  //       role: 'cancel'
-  //     }]
-  //   })
-  //   alert.present();
-  // }
+  exit(s: any) {
+    let alert = this.alert.create({
+      title: 'Confirm',
+      message: 'Do you want to exit?',
+      buttons: [{
+        text: "exit?",
+        handler: () => { this.exitApp() }
+      }, {
+        text: "Cancel",
+        role: 'cancel'
+      }]
+    })
+    alert.present();
+  }
 
-  // exitApp() {
-  //   this.platform.exitApp();
-  // }
+  exitApp() {
+    this.platform.exitApp();
+  }
 }

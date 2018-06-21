@@ -1,0 +1,264 @@
+<style type="text/css">
+    .error {
+        color: red;
+    }
+</style>
+<ion-content>
+
+    <!--header component-->
+    <mainHeader [title]="headerTitle"></mainHeader>
+
+    <div class="bodySection">
+
+        <ion-card>
+
+            <ion-card-header>
+                DSR Form
+            </ion-card-header>
+
+
+            <ion-card-content>
+
+                <ion-row>
+                    <ion-col>
+                        <form>
+
+                            <!-- Source -->
+                            <ion-row>
+                                <ion-col col-12>
+                                    <label class="frmLabel">ISP</label>
+                                    <label class="frmLabelRequired" style="color:red"> *</label>
+                                    <ion-select required interface="popover" name="isp" #isp="ngModel" [(ngModel)]="forms.isp">
+                                        <ion-option *ngFor="let isp of ispList" value="{{isp.isp_name}}">{{isp.isp_name}}</ion-option>
+                                    </ion-select>
+
+                                    <div class="error" *ngIf="isp.invalid">
+                                        Isp is required
+                                    </div>
+                                </ion-col>
+                            </ion-row>
+
+                            <!-- Vertical -->
+                            <ion-row>
+                                <ion-col col-12>
+                                    <label class="frmLabel">Vertical</label><label class="frmLabelRequired" style="color:red"> *</label>
+                                    <ion-select required name="vertical" #vertical="ngModel" interface="popover" [(ngModel)]="forms.vertical">
+                                        <ion-option value="Mobility">Mobility</ion-option>
+                                        <ion-option value="Data">Data</ion-option>
+                                        <ion-option value="Cloud">Cloud</ion-option>
+                                        <ion-option value="PRI">PRI</ion-option>
+                                    </ion-select>
+
+                                    <div class="error" *ngIf="vertical.invalid">
+                                        Vertical is required
+                                    </div>
+                                </ion-col>
+                            </ion-row>
+
+                            <!-- Company Formate -->
+                            <ion-row>
+                                <ion-col col-12>
+                                    <label class="frmLabel"> Company Formate</label><label class="frmLabelRequired" style="color:red"> *</label>
+
+                                    <ion-select required name="companyFormate" #companyFormate="ngModel" interface="popover" [(ngModel)]="forms.company_formate">
+
+                                        <ion-option value="new" (ionSelect)="onCustomerFormateChange($event)">Select Company</ion-option>
+
+                                        <ion-option value="first_time" (ionSelect)="onCustomerFormateChange($event)">Create new company</ion-option>
+
+                                    </ion-select>
+                                    <div class="error" *ngIf="companyFormate.invalid">
+                                        Company Formate is required
+                                    </div>
+                                </ion-col>
+                            </ion-row>
+
+
+                            <ion-row *ngIf="forms.company_formate=='new'">
+                                <ion-col col-12>
+                                    <label class="frmLabel"> Customer Name</label>
+
+                                    <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+
+                                    <ion-list name="comid" radio-group required #comid="ngModel" [(ngModel)]="forms.customer.comid" style="height:100px;overflow:scroll">
+
+                                        <ion-item *ngFor="let company of companyListSorted">
+                                            <ion-label> {{company.companyname}}</ion-label>
+                                            <ion-radio value="{{company.comid}}" (ionSelect)="onChangeCustomer(company)"></ion-radio>
+                                        </ion-item>
+
+                                    </ion-list>
+
+                                    <div class="error" *ngIf="comid.invalid">
+                                        Customer is required
+                                    </div>
+                                </ion-col>
+
+
+                                <ion-col col-12 *ngIf="forms.customer!=null">
+                                    <label class="frmLabel"> Contact Person </label>
+                                    <input type="text" value="" name="conatctperson" [(ngModel)]="forms.customer.contactperson" />
+
+                                </ion-col>
+
+                                <ion-col col-12 *ngIf="forms.customer!=null">
+                                    <label class="frmLabel"> Contact No </label>
+                                    <input type="text" value="" name="mno" [(ngModel)]="forms.customer.mno" />
+
+                                </ion-col>
+
+                            </ion-row>
+
+                            <ion-row *ngIf="forms.company_formate=='first_time'">
+
+                                <ion-col col-12>
+                                    <label class="frmLabel"> Customer Name </label>
+                                    <input type="text" name="customername" value="" required #companyname="ngModel" [(ngModel)]="forms.firstTimeCustomer.companyname"
+                                    />
+                                    <div class="error" *ngIf="companyname.invalid">
+                                        Customer is required
+                                    </div>
+                                </ion-col>
+                                <ion-col col-12>
+                                    <label class="frmLabel"> Area </label>
+                                    <input type="text" value="" name="area" [(ngModel)]="forms.firstTimeCustomer.area" />
+
+                                </ion-col>
+                                <ion-col col-12>
+                                    <label class="frmLabel"> Contact person </label>
+                                    <input type="text" value="" name="person" [(ngModel)]="forms.firstTimeCustomer.person" />
+
+                                </ion-col>
+                                <ion-col col-12>
+                                    <label class="frmLabel"> Contact no </label>
+                                    <input type="text" value="" name="contact" [(ngModel)]="forms.firstTimeCustomer.contact" />
+                                </ion-col>
+                                <ion-col col-12>
+                                    <label class="frmLabel"> Address </label>
+                                    <input type="text" value="" name="address" [(ngModel)]="forms.firstTimeCustomer.address" />
+
+                                </ion-col>
+                                <ion-col col-12>
+                                    <label class="frmLabel"> Reference </label>
+
+                                    <ion-list radio-group name="salesRefNew" [(ngModel)]="forms.firstTimeCustomer.referance" style="height:100px;overflow:scroll">
+
+                                        <ion-item *ngFor="let salesRef of salesReferenceList">
+                                            <ion-label> {{salesRef.source}}</ion-label>
+                                            <ion-radio value="{{salesRef.source}}"></ion-radio>
+                                        </ion-item>
+
+                                    </ion-list>
+                                </ion-col>
+
+                                <ion-col col-12>
+                                    <button ion-button type="button" (click)="addNewCompany()">Add New Company</button>
+
+                                </ion-col>
+                            </ion-row>
+
+                            <!-- Product Requirement -->
+                            <ion-row>
+                                <ion-col col-12>
+                                    <label class="frmLabel">Product Requirement</label><label class="frmLabelRequired" style="color:red"> *</label>
+                                    <ion-select name="product" multiple="true" required interface="popover" #product="ngModel" [(ngModel)]="forms.product">
+                                        <ion-option *ngFor="let product of productList" value="{{product.product}}">{{product.product}}</ion-option>
+                                    </ion-select>
+                                    <div class="error" *ngIf="product.invalid">
+                                        Product is required
+                                    </div>
+                                </ion-col>
+                            </ion-row>
+
+                            <!-- Reference -->
+                            <ion-row>
+                                <ion-col col-12>
+                                    <label class="frmLabel"> Reference </label>
+                                    <ion-select name="salesRef" required  interface="popover" #referance="ngModel" [(ngModel)]="forms.referance">
+                                        <ion-option *ngFor="let salesRef of salesReferenceList" value="{{salesRef.source}}">{{salesRef.source}}</ion-option>
+                                    </ion-select>
+
+                                    <div class="error" *ngIf="referance.invalid">
+                                        Refrence is required
+                                    </div>
+                                </ion-col>
+                            </ion-row>
+
+                            <!-- 6.	Current Level -->
+                            <ion-row>
+                                <ion-col col-12>
+                                    <label class="frmLabel">Current Level</label><label class="frmLabelRequired" style="color:red"> *</label>
+                                    <ion-select required interface="popover" name="level" #level="ngModel" [(ngModel)]="forms.current_level">
+                                        <ion-option *ngFor="let currentLevel of currentLevelList" value="{{currentLevel.level}}">{{currentLevel.level}}</ion-option>
+                                    </ion-select>
+                                    <div class="error" *ngIf="level.invalid">
+                                        Current Level is required
+                                    </div>
+                                </ion-col>
+                            </ion-row>
+
+                            <!-- 8.	Approx Profit-->
+                            <ion-row [hidden]="forms.current_level =='' ||forms.current_level =='Opportunity' || forms.current_level =='Understand Requirments' ||forms.current_level=='Technical Discussion'">
+                                <ion-col col-12>
+                                    <label class="frmLabel">Order Value</label><label class="frmLabelRequired" style="color:red"> *</label>
+                                    <input type="text" value="" name="approxProfit" [(ngModel)]="forms.approx_profit" />
+
+                                </ion-col>
+                            </ion-row>
+
+                            <!-- 7.	Assign To-->
+                            <ion-row>
+                                <ion-col col-12>
+                                    <label class="frmLabel">Assign To</label>
+                                    <label class="frmLabelRequired" style="color:red"> *</label>
+                                    <ion-select required name="assignTo" interface="popover" #assignTo="ngModel" [(ngModel)]="forms.assign_to">
+                                        <ion-option *ngFor="let person of salesPersonList" value="{{person.username}}">{{person.username}}</ion-option>
+                                    </ion-select>
+                                    <div class="error" *ngIf="assignTo.invalid">
+                                        AssignTo is required
+                                    </div>
+                                </ion-col>
+                            </ion-row>
+
+                            <!-- 8.	ThirdParty-->
+                            <ion-row [hidden]="forms.assign_to!='Third_Party'">
+                                <ion-col col-12>
+                                    <label class="frmLabel">Third Party</label><label class="frmLabelRequired" style="color:red"> *</label>
+
+                                    <input type="text" value="" name="thirdParty" required #thirdparty="ngModel" [(ngModel)]="forms.third_party" />
+                                    <div class="error" *ngIf="thirdparty.invalid">
+                                        Third Party is required
+                                    </div>
+
+                                </ion-col>
+                            </ion-row>
+
+                            <!-- 9.	Description -->
+                            <ion-row>
+                                <ion-col col-12>
+                                    <label class="frmLabel"> Description </label>
+                                    <input type="text" required value="" name="description" #description="ngModel" [(ngModel)]="forms.discription" />
+                                    <div class="error" *ngIf="description.invalid && (description.dirty || description.touched)">
+                                        Description is required
+                                    </div>
+                                </ion-col>
+                            </ion-row>
+
+                            <!-- Button -->
+                            <ion-row>
+                                <ion-col col-12>
+                                    <button ion-button (click)="saveFunnelForm($event)">Save</button>
+
+                                </ion-col>
+                            </ion-row>
+
+                        </form>
+                    </ion-col>
+                </ion-row>
+
+
+            </ion-card-content>
+        </ion-card>
+
+    </div>
+</ion-content>

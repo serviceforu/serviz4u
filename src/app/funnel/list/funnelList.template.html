@@ -1,0 +1,107 @@
+<ion-content>
+
+    <!--header component-->
+    <mainHeader [title]="headerTitle"></mainHeader>
+
+    <div class="bodySection">
+
+        <ion-card>
+
+            <ion-card-header>
+
+                <ion-row>
+                    <ion-col col-6 no-padding>
+                        Funnel List
+                    </ion-col>
+                    <ion-col col-6 no-padding float-right text-right>
+                            <button ion-button round (click)="onAdd($event)">Add</button>
+                    </ion-col>
+                </ion-row>
+
+            </ion-card-header>
+
+            <ion-card *ngFor='let funnel of funnelList'>
+
+                <ion-card-header (click)="showSelectedSalesDetailModal(sales)">
+
+                    <ion-grid>
+
+                        <ion-row>
+                            <ion-col col-12 no-padding>
+                                <label class="item-text-wrap companyName">
+                                                                        {{funnel.company_name}}
+                                </label>
+                            </ion-col>
+                        </ion-row>
+
+
+                    </ion-grid>
+                </ion-card-header>
+
+                <ion-card-content>
+                    <ion-grid>
+
+                        <ion-row>
+
+                            <ion-col col-6 no-padding>
+                                <label class="frmLabel">Company Name</label>
+                                <label class="frmText"> {{funnel.company_name}}</label>
+                            </ion-col>
+
+                            <ion-col col-6 no-padding>
+                                <label class="frmLabel">Date</label>
+                                <label class="frmText"> {{funnel.date}}</label>
+                            </ion-col>
+                        </ion-row>
+
+                        <ion-row>
+
+                            <ion-col col-6 no-padding>
+                                <label class="frmLabel">Contact Name</label>
+                                <label class="frmText"> {{funnel.contact_name}}</label>
+                            </ion-col>
+
+                            <ion-col col-6 no-padding>
+                                <label class="frmLabel">Contact No</label>
+                                <label class="frmText"> {{funnel.contact_number }}</label>
+                            </ion-col>
+
+                        </ion-row>
+
+                        <ion-row>
+
+                            <ion-col col-6 no-padding>
+                                <label class="frmLabel">Requirement </label>
+                                <label class="frmText"> {{funnel.product}}</label>
+                            </ion-col>
+
+                            <ion-col col-6 no-padding>
+                                <label class="frmLabel">Assign By </label>
+                                <label class="frmText"> {{funnel.assign_by}}</label>
+                            </ion-col>
+
+                        </ion-row>
+
+                        <ion-row>
+
+                            <ion-col col-6 no-padding>
+                                <label class="frmLabel">Status  </label>
+                                <label class="frmText"> {{funnel.status}}</label>
+                            </ion-col>
+
+                            <ion-col col-6 no-padding>
+                                <label class="frmLabel">Order Value</label>
+                                <label class="frmText"> {{funnel.approx_profit}}</label>
+                            </ion-col>
+
+
+
+                        </ion-row>
+                    </ion-grid>
+                </ion-card-content>
+            </ion-card>
+
+
+        </ion-card>
+    </div>
+</ion-content>

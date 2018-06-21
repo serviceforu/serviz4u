@@ -195,7 +195,7 @@ export class AirtelSalesTimesheetComponent {
     }
 
     save(e) {
-debugger;
+//debugger;
         if (this.companyFormate !=undefined) {
             let latitude: number;
             let longitude: number;
@@ -267,7 +267,10 @@ debugger;
             error => { this.errorHandling.ShowError(error, false); },
             () => {
                 this.errorHandling.HideLoading();
-                this.navController.push(AirtelDSRListComponent);
+
+                this.navController.setRoot(AirtelDSRListComponent);
+                this.navController.popToRoot();
+                //this.navController.push(AirtelDSRListComponent);
             })
     }
 

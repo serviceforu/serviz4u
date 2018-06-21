@@ -1,13 +1,14 @@
 import { Component, Injector } from '@angular/core'
 import { FormBuilder, Validators } from '@angular/forms';
 
-import { NavController, AlertController, LoadingController, Loading, ModalController } from 'ionic-angular'
+import { NavController, AlertController, LoadingController, Loading } from 'ionic-angular'
 import { AuthenticationService } from '../../../services/authentication.service'
 import { UserService } from '../../../services/user.service'
 import { ErrorHandlingService } from '../../../services/errorHandling.service'
 import { SalesService } from '../../../services/sales.service'
 import { SalesForm } from '../../..sales/viewModel/salesForm'
 import { AirtelDSRDetailComponent } from '../../../sales/airtel/detail/airtelDSRDetail.component';
+import { AirtelSalesTimesheetComponent } from "../airtelSalesTimesheet.component";
 @Component({
     selector: 'airtelDSRList',
     templateUrl: 'airtelDSRList.template.html',
@@ -19,6 +20,7 @@ export class AirtelDSRListComponent {
     headerTitle: string = 'Airtel DSR List';
     loading: Loading;
     salesTimeSheetList: any[];
+    currentDate=Date.now();
 
     constructor(public formBuilder: FormBuilder,
         public navController: NavController,
@@ -26,10 +28,11 @@ export class AirtelDSRListComponent {
         private loadingCtrl: LoadingController,
         private userService: UserService,
         private salesService: SalesService,
-        private salesModal: ModalController
-        , private errorHandling: ErrorHandlingService
+        //private salesModal: ModalController
+        private errorHandling: ErrorHandlingService
     ) {
         this.getSalesTimeSheetList();
+        //this.currentDate=new Date()
     }
 
     getSalesTimeSheetList() {
@@ -44,7 +47,7 @@ export class AirtelDSRListComponent {
 
 
             }
-        }, error => { this.errorHandling.ShowError(error,false); }, () => { this.errorHandling.HideLoading(); })
+        }, error => { this.errorHandling.ShowError(error, false); }, () => { this.errorHandling.HideLoading(); })
 
     }
 
@@ -53,10 +56,17 @@ export class AirtelDSRListComponent {
 
         // if (selectedSales.Status == "Open" || selectedSales.Status == "In_prog" || selectedSales.Status == "Pending") 
         // {
-        let salesModal = this.salesModal.create(AirtelDSRDetailComponent, { sales: selectedSales });
+        // let salesModal = this.salesModal.create(AirtelDSRDetailComponent, { sales: selectedSales });
 
-        salesModal.present();
-        salesModal.onDidDismiss(() => { this.getSalesTimeSheetList(); });
+        // salesModal.present();
+        // salesModal.onDidDismiss(() => { this.getSalesTimeSheetList(); });
+
+
+        this.navController.push(AirtelDSRDetailComponent, { sales: selectedSales });
         //}
+    }
+
+    onAdd(event) {
+        this.navController.push(AirtelSalesTimesheetComponent)
     }
 }
